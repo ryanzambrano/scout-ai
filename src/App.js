@@ -28,7 +28,7 @@ function Header() {
         </div>
       </div>
       <div className="center">
-        <div className="scout">Scout AI</div>
+        <div className="scout">Scout Global</div>
       </div>
       <div className="right">
         <div className="nfl">NFL</div>
