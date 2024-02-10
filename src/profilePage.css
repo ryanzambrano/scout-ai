@@ -1,0 +1,38 @@
+/* ProfilePage.css */
+
+.card {
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    height: 75vh;
+    border-radius: 5%;
+  }
+  
+  .container {
+    margin: 150px;
+  }
+  
+  .name {
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+  }
+  
+  .profile {
+    margin-right: 10px;
+    margin-left: 50px;
+    width: 300px;  /* Set a specific width */
+    height: 400px; /* Set a specific height */
+    border-radius: 100%; /* Create an oval shape by setting border-radius to 50% */
+    overflow: hidden;/* Ensure content doesn't overflow outside the oval */
+    justify-content: center;
+    display: flex;
+
+  }
+  
+  
+  .player_content {
+    display: flex;
+    align-items: flex-end; /* Align items to the bottom of the container */
+  }
+  
