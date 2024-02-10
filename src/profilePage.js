@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 
 function profilePage() {
-
-
-    
+  return <div>hi</div>;
 }
 
-
-export default function profilePage;
+export default profilePage;
