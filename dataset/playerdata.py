@@ -1,7 +1,7 @@
 import pandas as pd
 from bs4 import BeautifulSoup
 import requests
-from selenium import webdriver
+
 url= 'https://basketball.realgm.com/international/league/4/Spanish-ACB/stats/2024/Averages/'
 response = requests.get(url)
 if response.status_code == 200:
@@ -44,7 +44,8 @@ if response2.status_code == 200:
     age_element = soup.select_one('.profile-box .half-column-left p:-soup-contains("Born:")')
     age_text = age_element.get_text(strip=True)
     age_value = age_text.split('(')[-1].split(' ')[0]
-    print(age_value)
+
+
 
     
 
