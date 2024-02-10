@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "./supabase.js";
 import "./homePage.css";
+import { useNavigate } from "react-router-dom";
 
 function Card({ player }) {
   const [isFlipped, setIsFlipped] = useState(false);
+  let navigate = useNavigate();
 
-  const handleClick = () => {
+  function goToProfile(player) {
+    navigate(`/profile/${encodeURIComponent(player)}`);
+  }
+
+  const handleClick = (player) => {
     setIsFlipped(!isFlipped);
-    //alert(player.id);
+    goToProfile(player);
   };
 
   return (
-    <div className="card-container" onClick={handleClick}>
+    <div className="card-container" onClick={() => handleClick(player)}>
       <div className="player-card">
         <div className="player-name">
           {player.Player} <div className="player-lg">{player.League}</div>
