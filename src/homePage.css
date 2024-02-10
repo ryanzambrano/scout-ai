@@ -12,9 +12,16 @@
     align-self: center;
     text-align: center;
     width: 30%;
-    background-color: darkgray;
+    background-color: rgba(169, 169, 169, 0.2);
+    border-width: 0;
     border-radius: 12px;
-    padding: 10px
+    padding: 10px;
+    color:white;
+    font-size: 19px;
+}
+
+.search-bar:focus {
+  outline: none; /* Optional: Removes the default focus outline */
 }
 
 .dashboard-title {
@@ -29,11 +36,11 @@
     border-radius: 10px
 }
 
-.player-grid {
+.player-list {
+  display: flex;
+  flex-direction: column;
     margin-top: 50px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Create 4 columns of equal width */
-  --grid-template-rows: repeat(2, 1fr); /* Create 4 rows of equal height */
+   /* Create 4 rows of equal height */
   gap: 10px;
   border-style: dotted;
   border-width: 1px;
@@ -60,8 +67,8 @@
     justify-content: center;
     align-self: center;
     border-radius: 12px;
-    padding: 20px;
-    padding-top: 25px;
+    --padding: 20px;
+    padding-top: 0px;
     color:white;
     transition: transform 0.6s;
   transform-style: preserve-3d;
@@ -122,5 +129,84 @@ body {
 }
 
 
+.metric-container {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* This will create 2 columns */
+  gap: 10px;
+  justify-content: flex-start;
+  position: relative; /* Needed for absolute positioning of the pseudo-element */
+}
 
+.metric-container::after {
+  content: "";
+  position: absolute;
+  left: 50%; /* Position the line in the middle */
+  transform: translateX(-50%); /* Center the line exactly */
+  top: 0;
+  bottom: 0;
+  width: 2px; /* Width of the Y-axis line */
+  background-color: #ccc; /* Color of the Y-axis line */
+}
 
+.metric-item {
+  color: white;
+  font-size: 15px;
+  --align-self: center; /* Aligns items at the start of their cell */
+}
+
+.name-container {
+  text-align: center;
+  align-self: center;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  --padding: 15px;
+  width: 100%;
+  background-color:rgb(101, 101, 97);
+  --display: flex;
+  flex: 1;
+  display: flex;
+  --flex: 1;
+  --width: max-content;
+  font-size: 20;
+  font-weight: 600;
+  text-align: center;
+  align-self: center;
+  justify-content: center;
+}
+
+.player-name {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  --padding: 15px;
+  width: 100%;
+  background-color:rgb(101, 101, 97);
+  --display: flex;
+  flex: 1;
+  display: flex;
+  --flex: 1;
+  --width: max-content;
+  font-size: 20;
+  font-weight: 600;
+  text-align: center;
+  align-self: center;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.player-lg {
+  font-weight:lighter;
+}
+.player-lg::before {
+  content: "";
+  display: inline-block;
+  width: 8px; /* Adjust the width of the space */
+}
+
+.player-image {
+  width: auto;
+  height: 80px;
+  align-self: flex-end;
+  margin-bottom: 10px;
+}
