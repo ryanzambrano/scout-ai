@@ -2,12 +2,64 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Bar } from "react-chartjs-2";
 import { useLocation } from "react-router-dom";
+import { supabase } from './supabase';
 
 import "./profilePage.css";
 
 function ProfilePage() {
+  const [playerData, setPlayerData] = useState(null);
+  const [playerarray, setPlayerarray] = useState(null);
+  
   const location = useLocation();
   let { player1 } = useParams();
+  useEffect(() => {
+    const fetchPlayerData = async () => {
+      try {
+        // Assuming 'international_stats' is the table name
+        const { data, error } = await supabase
+          .from('international_stats')
+          .select()
+          .eq('id', player1)
+          .single();
+
+        if (error) {
+          alert(error);
+          console.error('Error fetching player data:', error);
+        } else {
+          setPlayerData(data);
+          const array = [
+            playerData.GP,
+            playerData.MPG,
+            playerData.PPG,
+            playerData.FGM,
+            playerData.FGA,
+            playerData['FG%'],  // Use square bracket notation for property with "%"
+            playerData['3PM'],   // Use square bracket notation for property with "%"
+            playerData['3PA'],   // Use square bracket notation for property with "%"
+            playerData['3P%'],   // Use square bracket notation for property with "%"
+            playerData.FTM,
+            playerData.FTA,
+            playerData['FT%'],   // Use square bracket notation for property with "%"
+            playerData.ORB,
+            playerData.DRB,
+            playerData.RPG,
+            playerData.APG,
+            playerData.SPG,
+            playerData.BPG,
+            playerData.TOV,
+            playerData.PF
+          ];          
+      
+          setPlayerarray(array);
+          alert(playerarray[0]);
+        }
+      } catch (error) {
+        console.error('Error fetching player data:', error.message);
+      }
+    };
+
+    fetchPlayerData();
+  }, [player1]);
   //alert(player1);
   const [selectedTab, setSelectedTab] = useState("Stats");
   const barChartData = {
@@ -70,10 +122,11 @@ function ProfilePage() {
     "Turnovers",
     "Person Fouls",
   ];
+  
 
   return (
     <div className="container">
-      <div className="name">Name</div>
+      <div className="name">name</div>
       <div className="card">
         <div className="cardheader">
           <div
@@ -109,7 +162,7 @@ function ProfilePage() {
                           const dataIndex = rowIndex * 4 + colIndex;
                           return (
                             <td key={colIndex}>
-                              <div className="boxNumber">{dataIndex + 1}</div>
+                              <div className="boxNumber">{playerarray[dataIndex]}</div>
                               <div className="boxText">
                                 {tableData[dataIndex]}
                               </div>

@@ -74,15 +74,15 @@
     justify-content: center;
     display: flex;
     overflow: hidden;
-
+    margin-top: 30px;
   }
 
   .player_content {
     display: flex;
     align-items: flex-start; /* Align items to the bottom of the container */
     justify-content: space-between;
-    margin-left: 75px;
-    margin-right: 75px;
+    margin-left: 20px;
+    margin-right: 40px;
   }
 
   .player_content_text{
@@ -90,11 +90,19 @@
     margin-top: 100px;
   }
 
+  .middle{
+    align-items: center;
+    justify-items: center;
+    display: flex;
+    flex-direction: column;
+
+  }
+
 
   .player_content_circle1 {
     height: 300px;
     width: 300px;
-    margin-top: 40px;
+    margin-top: 60px;
     position: relative;
     background-color: red;
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
