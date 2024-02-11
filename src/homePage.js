@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 function Card({ player }) {
   const [isFlipped, setIsFlipped] = useState(false);
   let navigate = useNavigate();
-
   let overall = 90;
+
 
   function getFillColor(percentage) {
     if (percentage > 75) {
@@ -46,14 +46,14 @@ function Card({ player }) {
             <div
               className="player-overall-value"
               style={{
-                "--fill-percentage": `${overall}%`,
+                "--fill-percentage": `${player.SmallForwardRating}%`,
                 background: `conic-gradient(${getFillColor(
-                  overall
+                  player.SmallForwardRating
                 )} var(--fill-percentage, 100%), transparent 0)`,
                 transform: "rotateY(180deg)",
               }}
             >
-              <div className="player-overall-value1">90</div>
+              <div className="player-overall-value1">{player.SmallForwardRating}</div>
             </div>
           </div>
           <div className="player-position-content">
@@ -104,7 +104,7 @@ function HomePage() {
 
   const fetchData = async () => {
     const { data, error } = await supabase
-      .from("international_stats")
+      .from("playerStats")
       .select("*");
 
     if (error) {
