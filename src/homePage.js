@@ -95,10 +95,10 @@ function Card({ player, positionFilter }) {
             <div className="player-position-value">{player.Position}</div>
           </div>
           <div className="metric-container">
-            <div className="metric-item">{player.age}</div>
-            <div className="metric-item">{player.weight}</div>
-            <div className="metric-item">{player.height}</div>
-            <div className="metric-item">{player.nationality}</div>
+            <div className="metric-item">Age: {player.age}</div>
+            <div className="metric-item">Weight: {player.weight}</div>
+            <div className="metric-item">Height: {player.height}</div>
+            <div className="metric-item">Nationality: {player.nationality}</div>
           </div>
         </div>
       </div>

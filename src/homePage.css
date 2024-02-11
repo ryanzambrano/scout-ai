@@ -121,8 +121,12 @@
 }
 
 .card-container {
-    perspective: 1000px; /* Gives a 3D effect */
-  }
+  perspective: 1000px; /* Gives a 3D effect */
+  width: 600px;
+  overflow: hidden;
+  justify-content: space-between; /* Clips content that exceeds the container's dimensions */
+}
+
 
   .player-card.flip {
     transform: rotateY(180deg);

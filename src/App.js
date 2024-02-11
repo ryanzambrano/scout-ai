@@ -31,7 +31,7 @@ function Header() {
         <div className="scout">Scout Global</div>
       </div>
       <div className="right">
-        <div className="nfl">NFL</div>
+        <div className="nfl">NBA</div>
       </div>
     </div>
   );
