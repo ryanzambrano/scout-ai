@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { Bar } from "react-chartjs-2"
 
 import "./profilePage.css";
 
@@ -28,6 +29,7 @@ function ProfilePage() {
     "Turnovers",
     "Person Fouls",
   ];
+
 
   return (
     <div className="container">
@@ -68,7 +70,9 @@ function ProfilePage() {
                           return (
                             <td key={colIndex}>
                               <div className="boxNumber">{dataIndex + 1}</div>
-                              <div className="boxText">
+                               <div className="boxText">
+                               
+                            
                                 {tableData[dataIndex]}
                               </div>
                             </td>
@@ -81,8 +85,22 @@ function ProfilePage() {
               </table>
             </div>
           )}
-          {selectedTab === "Prediction" && <p>Prediction content goes here</p>}
-          {selectedTab === "Overview" && <p>Overview content goes here</p>}
+          {selectedTab === "Prediction" && (<p>Yo</p>)}
+          {selectedTab === "Overview" && (( <div className="player_content">
+        <div className="profile">
+        <img src={'https://cdn.nba.com/headshots/nba/latest/1040x760/1630581.png'} />
+        </div>
+       < div classname="otherplayercontent">
+       <div className="player_content_text">
+          analysis
+        </div>
+       </div>
+       < div classname="otherplayercontent">
+        <div className="player_content_circle1">
+          Graph
+        </div>
+       </div>
+      </div>))}
         </div>
       </div>
     </div>
