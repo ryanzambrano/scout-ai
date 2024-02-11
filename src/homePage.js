@@ -25,7 +25,7 @@ function Card({ player }) {
 
   const handleClick = (player) => {
     setIsFlipped(!isFlipped);
-    goToProfile(player.Player);
+    goToProfile(player.id);
   };
 
   return (
