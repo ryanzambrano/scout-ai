@@ -30,6 +30,22 @@ function Card({ player, positionFilter }) {
     setIsFlipped(!isFlipped);
     goToProfile(player.id, positionFilter);
   };
+  const getPlayerRatingBasedOnPosition = (positionFilter, player) => {
+    switch (positionFilter) {
+      case "PG":
+        return player.PointGuardRating;
+      case "SG":
+        return player.ShootingGuardRating;
+      case "SF":
+        return player.SmallForwardRating;
+      case "C":
+        return player.CenterRating;
+      case "PF":
+        return player.PowerForwardRating;
+      default:
+        return player.PointGuardRating; // Replace with an appropriate default value
+    }
+  };
 
   return (
     <div className="card-container" onClick={() => handleClick(player)}>
@@ -62,8 +78,7 @@ function Card({ player, positionFilter }) {
                       return `${player.PointGuardRating}%`;
                   }
                 })(),
-                background: `conic-gradient(${getFillColor(
-                  player.ShootingGuardRating
+                background: `conic-gradient(${getFillColor(getPlayerRatingBasedOnPosition(positionFilter, player)
                 )} var(--fill-percentage, 100%), transparent 0)`,
                 transform: "rotateY(180deg)",
               }}
@@ -90,7 +105,7 @@ function Card({ player, positionFilter }) {
           </div>
           <div className="player-position-content">
             <div className="item-text">POS</div>
-            <div className="player-position-value">{player.Position}</div>
+            <div className="player-position-value">{positionFilter}</div>
           </div>
           <div className="metric-container">
             <div className="metric-item">Age: {player.age}</div>
@@ -214,7 +229,7 @@ function HomePage() {
           ))}
         </div>
       )}
-      <div className="dashboard-title">Best Picks</div>
+      <div className="dashboard-title">Potenital Prospects</div>
       <select
         onChange={(e) => handleFilterChange(e.target.value)}
         className="position-filter-dropdown"
@@ -230,7 +245,7 @@ function HomePage() {
       ) : (
         <div className="player-list">
           <div className="player-list">
-            {filteredPlayers.slice(0, 5).map((player, index) => (
+            {filteredPlayers.slice(0, 15).map((player, index) => (
               <Card
                 key={player.id || index}
                 player={player}

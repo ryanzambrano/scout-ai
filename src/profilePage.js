@@ -219,19 +219,66 @@ function ProfilePage() {
                         <div className="player1-overall-content">
                           <div className="item1-text">OVR</div>
                           <div
-                            className="player1-overall-value"
-                            style={{
-                              "--fill-percentage": `${overall}%`,
-                              background: `${getFillColor(overall)}`,
-                            }}
-                          >
-                            <div className="player1-overall-value1">90</div>
+  className="player1-overall-value"
+  style={{
+    "--fill-percentage": (() => {
+      switch (positionFilter) {
+        case "PG":
+          return `${playerData.PointGuardRating}%`;
+        case "SG":
+          return `${playerData.ShootingGuardRating}%`;
+        case "SF":
+          return `${playerData.SmallForwardRating}%`;
+        case "C":
+          return `${playerData.CenterRating}%`;
+        case "PF":
+          return `${playerData.PowerForwardRating}%`;
+        default:
+          return `${overall}%`; // You might want to replace 'overall' with an appropriate default value
+      }
+    })(),
+    background: (() => {
+      switch (positionFilter) {
+        case "PG":
+          return getFillColor(playerData.PointGuardRating);
+        case "SG":
+          return getFillColor(playerData.ShootingGuardRating);
+        case "SF":
+          return getFillColor(playerData.SmallForwardRating);
+        case "C":
+          return getFillColor(playerData.CenterRating);
+        case "PF":
+          return getFillColor(playerData.PowerForwardRating);
+        default:
+          return getFillColor(overall); // You might want to replace 'overall' with an appropriate default value
+      }
+    })(),
+  }}
+>
+                            <div className="player1-overall-value1">
+                {(() => {
+                  switch (positionFilter) {
+                    case "PG":
+                      return playerData.PointGuardRating;
+                    case "SG":
+                      return playerData.ShootingGuardRating;
+                    case "SF":
+                      return playerData.SmallForwardRating;
+                    case "C":
+                      return playerData.CenterRating;
+                    case "PF":
+                      return playerData.PowerForwardRating;
+                    default:
+                      return playerData.PointGuardRating;
+                  }
+                })()}
+              </div>
                           </div>
                         </div>
                         <div className="player1-position-content">
                           <div className="item1-text">POS</div>
                           <div className="player1-position-value">
-                            {playerData.Position}
+                            {positionFilter}
                           </div>
                         </div>
                       </div>
