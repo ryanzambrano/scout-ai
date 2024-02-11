@@ -1,10 +1,6 @@
 import React, { useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import { Bar } from "react-chartjs-2";
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 
 import "./profilePage.css";
 
@@ -127,29 +123,6 @@ function ProfilePage() {
             </div>
           )}
           {selectedTab === "Prediction" && (
-<<<<<<< Updated upstream
-            <div>
-              <Bar data={barChartData} options={barChartOptions} />
-            </div>
-          )}
-          {selectedTab === "Overview" && (
-            <div className="player_content">
-              <div className="profile">
-                <img
-                  src={
-                    "https://cdn.nba.com/headshots/nba/latest/1040x760/1630581.png"
-                  }
-                />
-              </div>
-              <div classname="otherplayercontent">
-                <div className="player_content_text">analysis</div>
-              </div>
-              <div classname="otherplayercontent">
-                <div className="player_content_circle1">Graph</div>
-              </div>
-            </div>
-          )}
-=======
   <div>
     hi
   </div>
@@ -170,7 +143,6 @@ function ProfilePage() {
         </div>
        </div>
       </div>))}
->>>>>>> Stashed changes
         </div>
       </div>
     </div>
