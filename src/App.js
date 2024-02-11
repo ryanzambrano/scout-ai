@@ -2,7 +2,7 @@ import logo from "./scout-logo.png";
 import "./App.css";
 import HomePage from "./homePage.js";
 import ProfilePage from "./profilePage.js";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 //import logo from "./scout-logo.png";
 
