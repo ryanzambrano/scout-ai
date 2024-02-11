@@ -8,87 +8,7 @@ import "./profilePage.css";
 
 import "chart.js/auto";
 
-const RadarChart = () => {
-  const data = {
-    labels: ["Driving", "Playmaking", "Rebounding", "Shooting", "Defending"],
-
-    datasets: [
-      {
-        label: " ",
-        data: [70, 50, 90, 35, 90],
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-        borderColor: "rgba(255, 200, 132, 1)",
-        borderWidth: 1,
-        color: "black",
-        borderColor: "orange", // Line color
-        pointBackgroundColor: "white", // Point fill color
-        pointBorderColor: "black", // Point border color
-        pointHoverBackgroundColor: "#fff", // Point hover fill color
-        pointHoverBorderColor: "black",
-      },
-    ],
-  };
-
-  const options = {
-    scales: {
-      r: {
-        pointLabels: {
-          color: "white", // Sets the color of the point labels (Value 1, Value 2, etc.) to black
-          font: {
-            size: 15, // Adjusts the font size, if needed
-            // You can specify other font properties here
-          },
-          // Include additional pointLabels styling here if needed
-        },
-        angleLines: {
-          display: true,
-        },
-
-        grid: {
-          color: "#11111",
-          lineWidth: 1, // Changes the grid lines to black
-        },
-        ticks: {
-          color: "black", // Tick labels (values) color
-          font: {
-            size: 12, // Example: setting the font size
-          },
-          // Additional customization for ticks can go here
-        },
-        suggestedMin: 0,
-        suggestedMax: 100,
-        ticks: {
-          // Change the tick marks to be bold and red
-          color: "black", // Color of the tick labels
-          font: {
-            size: 10, // Font size
-            style: "italic", // Font style
-            family: "Arial", // Font family
-          },
-          // Include a callback to format tick labels, e.g., adding a unit
-        },
-      },
-    },
-    elements: {
-      line: {
-        borderWidth: 7,
-        color: "black",
-      },
-    },
-    plugins: {
-      legend: {
-        display: false,
-        labels: {
-          // Customizing legend labels (e.g., the dataset label)
-          color: "blue", // Sets the color of the text
-          font: {
-            size: 20, // Sets font size
-          },
-        },
-      },
-    },
-  };
-
+const RadarChart = ({ data, options }) => {
   return <Radar data={data} options={options} />;
 };
 
@@ -116,7 +36,7 @@ function ProfilePage() {
       try {
         // Assuming 'international_stats' is the table name
         const { data, error } = await supabase
-          .from("international_stats")
+          .from("playerStats")
           .select("*")
           .eq("id", player1)
           .single();
@@ -280,38 +200,148 @@ function ProfilePage() {
               )}
 
               {selectedTab === "Overview" && (
-                <div className="column">
-                  <div className="player_content">
-                    <div className="player1-content">
-                      <div className="player1-overall-content">
-                        <div className="item1-text">OVR</div>
-                        <div
-                          className="player1-overall-value"
-                          style={{
-                            "--fill-percentage": `${overall}%`,
-                            background: `${getFillColor(overall)}`,
-                          }}
-                        >
-                          <div className="player1-overall-value1">90</div>
+                <div className="player_content">
+                  <img className="player1-image" src={playerData.img_url} />
+                  <div className="column">
+                    <div className="player1_content">
+                      <div className="player1-content">
+                        <div className="player1-overall-content">
+                          <div className="item1-text">OVR</div>
+                          <div
+                            className="player1-overall-value"
+                            style={{
+                              "--fill-percentage": `${overall}%`,
+                              background: `${getFillColor(overall)}`,
+                            }}
+                          >
+                            <div className="player1-overall-value1">90</div>
+                          </div>
+                        </div>
+                        <div className="player1-position-content">
+                          <div className="item1-text">POS</div>
+                          <div className="player1-position-value">
+                            {playerData.Position}
+                          </div>
                         </div>
                       </div>
-                      <div className="player1-position-content">
-                        <div className="item1-text">POS</div>
-                        <div className="player1-position-value">
-                          {playerData.Position}
+                      <div className="metric-container">
+                        <div className="metric-item">
+                          age: "{playerData.age}"
                         </div>
-                      </div>
-                    </div>
-                    <div className="metric-container">
-                      <div className="metric-item">age: "38"</div>
-                      <div className="metric-item">wieght "40lbs"</div>
+                        <div className="metric-item">
+                          weight "{playerData.weight}"
+                        </div>
 
-                      <div className="metric-item">height: "5,11"</div>
-                      <div className="metric-item">nationality: "France"</div>
+                        <div className="metric-item">
+                          height: "{playerData.height}"
+                        </div>
+                        <div className="metric-item">
+                          nationality: "{playerData.nationality}"
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="radar-chart">
-                    <RadarChart />
+                    <div className="bottoms">
+                      <div className="analysis">
+                        Markus Howard, a PG in Spanish ACB, is a sharpshooter
+                        with a strong offensive game. He excels in scoring,
+                        especially from beyond the arc and the free-throw line.
+                        Quick and agile, he's a valuable asset on the court.
+                      </div>
+                      <div className="radar-chart">
+                        <RadarChart
+                          data={{
+                            labels: [
+                              "Driving",
+                              "Playmaking",
+                              "Rebounding",
+                              "Shooting",
+                              "Defending",
+                            ],
+
+                            datasets: [
+                              {
+                                label: " ",
+                                data: [
+                                  playerData.inside,
+                                  playerData.playmaking,
+                                  playerData.rebound,
+                                  playerData.outside,
+                                  playerData.defense,
+                                ],
+                                backgroundColor: "rgba(255, 99, 132, 0.5)",
+                                borderColor: "rgba(255, 200, 132, 1)",
+                                borderWidth: 1,
+                                color: "black",
+                                borderColor: "orange", // Line color
+                                pointBackgroundColor: "white", // Point fill color
+                                pointBorderColor: "black", // Point border color
+                                pointHoverBackgroundColor: "#fff", // Point hover fill color
+                                pointHoverBorderColor: "black",
+                              },
+                            ],
+                          }}
+                          options={{
+                            scales: {
+                              r: {
+                                pointLabels: {
+                                  color: "white", // Sets the color of the point labels (Value 1, Value 2, etc.) to black
+                                  font: {
+                                    size: 15, // Adjusts the font size, if needed
+                                    // You can specify other font properties here
+                                  },
+                                  // Include additional pointLabels styling here if needed
+                                },
+                                angleLines: {
+                                  display: true,
+                                },
+
+                                grid: {
+                                  color: "#11111",
+                                  lineWidth: 1, // Changes the grid lines to black
+                                },
+                                ticks: {
+                                  color: "black", // Tick labels (values) color
+                                  font: {
+                                    size: 12, // Example: setting the font size
+                                  },
+                                  // Additional customization for ticks can go here
+                                },
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                                ticks: {
+                                  // Change the tick marks to be bold and red
+                                  color: "black", // Color of the tick labels
+                                  font: {
+                                    size: 10, // Font size
+                                    style: "italic", // Font style
+                                    family: "Arial", // Font family
+                                  },
+                                  // Include a callback to format tick labels, e.g., adding a unit
+                                },
+                              },
+                            },
+                            elements: {
+                              line: {
+                                borderWidth: 7,
+                                color: "black",
+                              },
+                            },
+                            plugins: {
+                              legend: {
+                                display: false,
+                                labels: {
+                                  // Customizing legend labels (e.g., the dataset label)
+                                  color: "blue", // Sets the color of the text
+                                  font: {
+                                    size: 20, // Sets font size
+                                  },
+                                },
+                              },
+                            },
+                          }}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
