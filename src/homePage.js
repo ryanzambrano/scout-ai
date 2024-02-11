@@ -59,7 +59,7 @@ function Card({ player, positionFilter }) {
                     case "PF":
                       return `${player.PowerForwardRating}%`;
                     default:
-                      return "0%";
+                      return `${player.PointGuardRating}%`;
                   }
                 })(),
                 background: `conic-gradient(${getFillColor(
@@ -82,7 +82,7 @@ function Card({ player, positionFilter }) {
                     case "PF":
                       return player.PowerForwardRating;
                     default:
-                      return 0;
+                      return player.PointGuardRating;
                   }
                 })()}
               </div>
@@ -146,13 +146,13 @@ function HomePage() {
 
   const fetchData = async () => {
     const { data, error } = await supabase
-      .from("playerStats")
-      .select("*");
-
+  .from("playerStats")
+  .select("*");
     if (error) {
       alert(error.message);
     } else {
       if (data.length > 0) {
+        alert(data.length);
         setPlayers(data);
         setFilteredPlayers(data);
         setIsLoading(false);
@@ -166,20 +166,34 @@ function HomePage() {
 
   const handleFilterChange = (position) => {
     setPositionFilter(position); // Update the position filter state
-
-    if (position === "") {
-      setFilteredPlayers(players); // No filter, show all players
-    } else {
-      // Filter players by the selected position
-      if (position) {
-        const filtered = players.filter(
-          (player) => player.Position === position
-        );
-        setFilteredPlayers(filtered);
-      } else {
-        setFilteredPlayers(players);
-      }
+  
+    let sortedPlayers;
+  
+    switch (position) {
+      case "PG":
+        sortedPlayers = sortPlayersByRating(players, 'PointGuardRating');
+        break;
+      case "SG":
+        sortedPlayers = sortPlayersByRating(players, 'ShootingGuardRating');
+        break;
+      case "SF":
+        sortedPlayers = sortPlayersByRating(players, 'SmallForwardRating');
+        break;
+      case "C":
+        sortedPlayers = sortPlayersByRating(players, 'CenterRating');
+        break;
+      case "PF":
+        sortedPlayers = sortPlayersByRating(players, 'PowerForwardRating');
+        break;
+      default:
+        sortedPlayers = players;
     }
+  
+    setFilteredPlayers(sortedPlayers);
+  };
+  
+  const sortPlayersByRating = (players, ratingField) => {
+    return players.slice().sort((a, b) => b[ratingField] - a[ratingField]);
   };
 
   return (
@@ -212,7 +226,6 @@ function HomePage() {
         onChange={(e) => handleFilterChange(e.target.value)}
         className="position-filter-dropdown"
       >
-        <option value="">All Positions</option>
         <option value="PG">Point Guard</option>
         <option value="SG">Shooting Guard</option>
         <option value="SF">Small Forward</option>
