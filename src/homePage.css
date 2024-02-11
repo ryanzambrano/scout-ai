@@ -39,12 +39,11 @@
 .player-list {
   display: flex;
   flex-direction: column;
-    margin-top: 50px;
+  margin-top: 5px;
    /* Create 4 rows of equal height */
   gap: 10px;
-  border-style: dotted;
-  border-width: 1px;
-  border-color: black;
+  border-width: 0px;
+  
   align-items: center;
   justify-content: center;
   place-items: center;
@@ -60,6 +59,7 @@
 }
 
 .player-card {
+  margin-top: 10px;
     display: flex;
     flex-direction: column;
     --backdrop-filter: blur(10px); /* Adjust the px value to control the blur intensity */
@@ -273,4 +273,28 @@ body {
   position: relative;
   
   z-index: 1;
+}
+
+select {
+  color: white;
+  background-color: grey;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+select:focus {
+  outline: none; /* Optional: Removes the default focus outline */
+}
+
+
+option {
+  color: white;
+  background-color: grey;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+option:focus {
+  outline: none; /* Optional: Removes the default focus outline */
 }

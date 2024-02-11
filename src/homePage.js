@@ -79,6 +79,7 @@ function HomePage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [player, setPlayer] = useState("");
+  const [positionFilter, setPositionFilter] = useState(""); // Added state for position filter
 
   const handleSearch = (event) => {
     const { value } = event.target;
@@ -111,11 +112,30 @@ function HomePage() {
     } else {
       if (data.length > 0) {
         setPlayers(data);
+        setFilteredPlayers(data);
         setIsLoading(false);
         //alert(data[0].Player); // Alert the id of the first player
       } else {
         setIsLoading(false);
         alert("No players found.");
+      }
+    }
+  };
+
+  const handleFilterChange = (position) => {
+    setPositionFilter(position); // Update the position filter state
+
+    if (position === "") {
+      setFilteredPlayers(players); // No filter, show all players
+    } else {
+      // Filter players by the selected position
+      if (position) {
+        const filtered = players.filter(
+          (player) => player.Position === position
+        );
+        setFilteredPlayers(filtered);
+      } else {
+        setFilteredPlayers(players);
       }
     }
   };
@@ -128,7 +148,6 @@ function HomePage() {
         value={searchTerm}
         onChange={handleSearch}
       />
-
       {searchTerm && (
         <div className="column">
           {filteredPlayers.map((player, index) => (
@@ -146,19 +165,29 @@ function HomePage() {
           ))}
         </div>
       )}
-
       <div className="dashboard-title">Best Picks</div>
+      <select
+        onChange={(e) => handleFilterChange(e.target.value)}
+        className="position-filter-dropdown"
+      >
+        <option value="">All Positions</option>
+        <option value="PG">Point Guard</option>
+        <option value="SG">Shooting Guard</option>
+        <option value="SF">Small Forward</option>
+        <option value="PF">Power Forward</option>
+        <option value="C">Center</option>
+      </select>{" "}
       {isLoading ? (
         <div>Loading...</div> // Placeholder for your loading indicator
       ) : (
         <div className="player-list">
-          <Card player={players[2]} />
-          <Card player={players[1]} />
-          <Card player={players[0]} />
-          <Card player={players[3]} />
+          <div className="player-list">
+            {filteredPlayers.slice(0, 5).map((player, index) => (
+              <Card key={player.id || index} player={player} />
+            ))}
+          </div>
         </div>
       )}
-
       {/*<div className="dashboard-title">Best Point Guards</div>
 
       <div className="player-grid">
