@@ -83,3 +83,9 @@
 .right {
   justify-self: flex-end;
 }
+
+button {
+  background-color: #111111;
+  color: #111111;
+  border-width: 0;
+}

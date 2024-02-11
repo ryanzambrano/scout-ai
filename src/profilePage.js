@@ -18,7 +18,8 @@ function ProfilePage() {
   const [isLoading, setIsLoading] = useState(true);
 
   const location = useLocation();
-  let { player1 } = useParams();
+  let { player1, positionFilter } = useParams();
+
   let overall = 90;
   let array = [null];
   function getFillColor(percentage) {

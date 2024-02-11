@@ -7,9 +7,6 @@ function Card({ player, positionFilter }) {
   const [isFlipped, setIsFlipped] = useState(false);
   let navigate = useNavigate();
 
-  
-
-
   function getFillColor(percentage) {
     if (percentage > 75) {
       return "green";
@@ -20,18 +17,19 @@ function Card({ player, positionFilter }) {
     }
   }
 
-  function goToProfile(player1) {
-    
-    navigate(`/profile/${encodeURIComponent(player1)}`);
+  function goToProfile(player1, positionFilter) {
+    // Encode both variables to ensure the URL is valid
+    const encodedPlayer1 = encodeURIComponent(player1);
+    const encodedPlayer2 = encodeURIComponent(positionFilter);
+
+    // Concatenate both encoded strings into the path, separated by a slash or any other separator as needed
+    navigate(`/profile/${encodedPlayer1}/${encodedPlayer2}`);
   }
 
   const handleClick = (player) => {
-
     setIsFlipped(!isFlipped);
-    goToProfile(player.id);
+    goToProfile(player.id, positionFilter);
   };
-
-
 
   return (
     <div className="card-container" onClick={() => handleClick(player)}>
@@ -39,10 +37,10 @@ function Card({ player, positionFilter }) {
         <div className="player-name">
           {player.Player} <div className="player-lg">{player.League}</div>
         </div>
-  
+
         <div className="player-content">
           <img className="player-image" src={player.img_url} />
-  
+
           <div className="player-overall-content">
             <div className="item-text">OVR</div>
             <div
@@ -104,8 +102,6 @@ function Card({ player, positionFilter }) {
       </div>
     </div>
   );
-  
-  
 }
 
 function HomePage() {
@@ -119,21 +115,20 @@ function HomePage() {
   const handleSearch = (event) => {
     const { value } = event.target;
     setSearchTerm(value);
-    
+
     if (!value) {
       setFilteredPlayers([]);
     } else {
       // Map through players to access the Player property, then filter
-      const filtered = players.filter(
-        (player) => player.Player.toLowerCase().includes(value.toLowerCase())
+      const filtered = players.filter((player) =>
+        player.Player.toLowerCase().includes(value.toLowerCase())
       ); // Filter player names
-  
+
       // Sort the filtered array by SmallForwardRating
-    
-  
+
       // Take the first 10 results
       const sliced = filtered.slice(0, 10);
-  
+
       setFilteredPlayers(sliced);
       // Update state with filtered players, up to 10
     }
@@ -142,20 +137,15 @@ function HomePage() {
   useEffect(() => {
     fetchData();
   }, []);
-  useEffect(() => {
-    
-  }, [positionFilter]);
+  useEffect(() => {}, [positionFilter]);
 
   const fetchData = async () => {
-    const { data, error } = await supabase
-  .from("player_stats")
-  .select("*");
-  
+    const { data, error } = await supabase.from("player_stats").select("*");
+
     if (error) {
       alert(error.message);
     } else {
       if (data.length > 0) {
-       
         setPlayers(data);
         setFilteredPlayers(data);
         setIsLoading(false);
@@ -169,32 +159,32 @@ function HomePage() {
 
   const handleFilterChange = (position) => {
     setPositionFilter(position); // Update the position filter state
-  
+
     let sortedPlayers;
-  
+
     switch (position) {
       case "PG":
-        sortedPlayers = sortPlayersByRating(players, 'PointGuardRating');
+        sortedPlayers = sortPlayersByRating(players, "PointGuardRating");
         break;
       case "SG":
-        sortedPlayers = sortPlayersByRating(players, 'ShootingGuardRating');
+        sortedPlayers = sortPlayersByRating(players, "ShootingGuardRating");
         break;
       case "SF":
-        sortedPlayers = sortPlayersByRating(players, 'SmallForwardRating');
+        sortedPlayers = sortPlayersByRating(players, "SmallForwardRating");
         break;
       case "C":
-        sortedPlayers = sortPlayersByRating(players, 'CenterRating');
+        sortedPlayers = sortPlayersByRating(players, "CenterRating");
         break;
       case "PF":
-        sortedPlayers = sortPlayersByRating(players, 'PowerForwardRating');
+        sortedPlayers = sortPlayersByRating(players, "PowerForwardRating");
         break;
       default:
         sortedPlayers = players;
     }
-  
+
     setFilteredPlayers(sortedPlayers);
   };
-  
+
   const sortPlayersByRating = (players, ratingField) => {
     return players.slice().sort((a, b) => b[ratingField] - a[ratingField]);
   };
@@ -209,7 +199,7 @@ function HomePage() {
       />
       {searchTerm && (
         <div className="column">
-          {filteredPlayers.slice(10,0).map((player, index) => (
+          {filteredPlayers.slice(10, 0).map((player, index) => (
             <div
               key={index}
               onClick={() => {
@@ -241,7 +231,11 @@ function HomePage() {
         <div className="player-list">
           <div className="player-list">
             {filteredPlayers.slice(0, 5).map((player, index) => (
-              <Card key={player.id || index} player={player} positionFilter = {positionFilter} />
+              <Card
+                key={player.id || index}
+                player={player}
+                positionFilter={positionFilter}
+              />
             ))}
           </div>
         </div>

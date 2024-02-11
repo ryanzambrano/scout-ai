@@ -3,6 +3,7 @@ import "./App.css";
 import HomePage from "./homePage.js";
 import ProfilePage from "./profilePage.js";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //import logo from "./scout-logo.png";
 
 function App() {
@@ -12,7 +13,10 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/profile/:player1" element={<ProfilePage />} />
+          <Route
+            path="/profile/:player1/:positionFilter"
+            element={<ProfilePage />}
+          />
         </Routes>
       </div>
     </Router>
@@ -20,12 +24,16 @@ function App() {
 }
 
 function Header() {
+  function goToProfile() {
+    navigate("/");
+  }
+  let navigate = useNavigate();
   return (
     <div className="header">
       <div className="left">
-        <div className="nfl">
+        <button className="nfl" onClick={goToProfile}>
           <img className="logo" src={logo} alt="Description of the image" />
-        </div>
+        </button>
       </div>
       <div className="center">
         <div className="scout">Scout Global</div>
