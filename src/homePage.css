@@ -56,6 +56,7 @@
     justify-content: center;
     align-self: center;
     padding: 10px;
+    gap: 20px
 }
 
 .player-card {
@@ -75,34 +76,48 @@
 }
 
 .player-overall-content {
+  align-self: center;
+
     padding: 5px;
-    font-size: 20px;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
 }
 
 .player-overall-value {
-    padding: 5px;
+    padding: 10px;
     border-width: 2px;
     border-style: solid;
     border-radius: 50px;
     border-color:black;
+    font-size: 24px;
+
 }
 
 .player-position-content {
+    align-self: center;
     padding: 5px;
-    font-size: 20px;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    
 }
 
 .player-position-value {
-    padding: 5px;
+    padding: 10px;
     border-width: 2px;
     border-style: solid;
     border-color:darkgreen;
     border-radius: 50px;
     background-color: darkgreen;
-}
+   font-size: 24px;
+  }
 
 .item-text {
-    font-size: 20px;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 .card-container {
@@ -130,28 +145,30 @@ body {
 
 
 .metric-container {
-  margin-top: 10px;
+  align-self: center;
+  --margin-top: 10px;
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* This will create 2 columns */
-  gap: 10px;
+  gap: 15px;
   justify-content: flex-start;
   position: relative; /* Needed for absolute positioning of the pseudo-element */
 }
 
-.metric-container::after {
+/*.metric-container::after {
   content: "";
   position: absolute;
-  left: 50%; /* Position the line in the middle */
-  transform: translateX(-50%); /* Center the line exactly */
+  left: 50%; /* Position the line in the middle 
+  transform: translateX(-50%); /* Center the line exactly 
   top: 0;
   bottom: 0;
-  width: 2px; /* Width of the Y-axis line */
-  background-color: #ccc; /* Color of the Y-axis line */
-}
+  width: 2px; /* Width of the Y-axis line 
+  background-color: #ccc; /* Color of the Y-axis line 
+}*/
 
 .metric-item {
-  color: white;
-  font-size: 15px;
+  color: rgba(255, 255, 255, 0.841);
+  font-size: 20px;
+  font-weight: 600;
   --align-self: center; /* Aligns items at the start of their cell */
 }
 
@@ -162,13 +179,13 @@ body {
   border-top-right-radius: 12px;
   --padding: 15px;
   width: 100%;
-  background-color:rgb(101, 101, 97);
+  background-color:rgb(161, 161, 154);
   --display: flex;
   flex: 1;
   display: flex;
   --flex: 1;
   --width: max-content;
-  font-size: 20;
+  font-size: 30;
   font-weight: 600;
   text-align: center;
   align-self: center;
@@ -180,13 +197,13 @@ body {
   border-top-right-radius: 12px;
   --padding: 15px;
   width: 100%;
-  background-color:rgb(101, 101, 97);
+  background-color:rgb(142, 142, 136);
   --display: flex;
   flex: 1;
   display: flex;
   --flex: 1;
   --width: max-content;
-  font-size: 20;
+  font-size: 30px;
   font-weight: 600;
   text-align: center;
   align-self: center;
@@ -196,7 +213,7 @@ body {
 }
 
 .player-lg {
-  font-weight:lighter;
+  font-weight:200;
 }
 .player-lg::before {
   content: "";
@@ -206,7 +223,54 @@ body {
 
 .player-image {
   width: auto;
-  height: 80px;
+  height: 100px;
   align-self: flex-end;
   margin-bottom: 10px;
+}
+
+.player-overall-value {
+  position: relative;
+  width: 50px; /* Ensure the width and height are equal for a perfect circle */
+  height: 50px;
+  padding: 4px;
+  border-width: 0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  background-color: transparent;
+}
+
+.player-overall-value1 {
+  position: relative;
+  width: 50px; /* Ensure the width and height are equal for a perfect circle */
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  background-color: grey;
+  transform: rotateY(180deg)
+}
+
+.player-overall-value::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  
+  z-index: 0;
+--transform: rotateY(180deg);
+  --backface-visibility: hidden;
+}
+
+.player-overall-value > * {
+  position: relative;
+  
+  z-index: 1;
 }

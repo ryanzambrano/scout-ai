@@ -1,12 +1,50 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Bar } from "react-chartjs-2"
+import { Bar } from "react-chartjs-2";
 
 import "./profilePage.css";
 
 function ProfilePage() {
   const { player } = useParams();
   const [selectedTab, setSelectedTab] = useState("Stats");
+  const barChartData = {
+    labels: [
+      "Points Per Game",
+      "Rebounds Per Game",
+      "Assists Per Game",
+      "Steals Per Game",
+      "Blocks Per Game",
+    ],
+    datasets: [
+      {
+        label: "Projected Season Averages",
+        data: [20, 10, 8, 2, 1], // Example data
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const barChartOptions = {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
   const tableData = [
     "Games Played",
     "Minutes Per Game",
@@ -29,7 +67,6 @@ function ProfilePage() {
     "Turnovers",
     "Person Fouls",
   ];
-
 
   return (
     <div className="container">
@@ -70,9 +107,7 @@ function ProfilePage() {
                           return (
                             <td key={colIndex}>
                               <div className="boxNumber">{dataIndex + 1}</div>
-                               <div className="boxText">
-                               
-                            
+                              <div className="boxText">
                                 {tableData[dataIndex]}
                               </div>
                             </td>
@@ -85,22 +120,28 @@ function ProfilePage() {
               </table>
             </div>
           )}
-          {selectedTab === "Prediction" && (<p>Yo</p>)}
-          {selectedTab === "Overview" && (( <div className="player_content">
-        <div className="profile">
-        <img src={'https://cdn.nba.com/headshots/nba/latest/1040x760/1630581.png'} />
-        </div>
-       < div classname="otherplayercontent">
-       <div className="player_content_text">
-          analysis
-        </div>
-       </div>
-       < div classname="otherplayercontent">
-        <div className="player_content_circle1">
-          Graph
-        </div>
-       </div>
-      </div>))}
+          {selectedTab === "Prediction" && (
+            <div>
+              <Bar data={barChartData} options={barChartOptions} />
+            </div>
+          )}
+          {selectedTab === "Overview" && (
+            <div className="player_content">
+              <div className="profile">
+                <img
+                  src={
+                    "https://cdn.nba.com/headshots/nba/latest/1040x760/1630581.png"
+                  }
+                />
+              </div>
+              <div classname="otherplayercontent">
+                <div className="player_content_text">analysis</div>
+              </div>
+              <div classname="otherplayercontent">
+                <div className="player_content_circle1">Graph</div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

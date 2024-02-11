@@ -7,6 +7,18 @@ function Card({ player }) {
   const [isFlipped, setIsFlipped] = useState(false);
   let navigate = useNavigate();
 
+  let overall = 90;
+
+  function getFillColor(percentage) {
+    if (percentage > 75) {
+      return "green";
+    } else if (percentage > 50) {
+      return "yellow";
+    } else {
+      return "red";
+    }
+  }
+
   function goToProfile(player) {
     navigate(`/profile/${encodeURIComponent(player)}`);
   }
@@ -28,20 +40,32 @@ function Card({ player }) {
             className="player-image"
             src="https://cdn.nba.com/headshots/nba/latest/1040x760/202710.png"
           />
+
+          <div className="player-overall-content">
+            <div className="item-text">OVR</div>
+            <div
+              className="player-overall-value"
+              style={{
+                "--fill-percentage": `${overall}%`,
+                background: `conic-gradient(${getFillColor(
+                  overall
+                )} var(--fill-percentage, 100%), transparent 0)`,
+                transform: "rotateY(180deg)",
+              }}
+            >
+              <div className="player-overall-value1">90</div>
+            </div>
+          </div>
+          <div className="player-position-content">
+            <div className="item-text">POS</div>
+            <div className="player-position-value">{player.Position}</div>
+          </div>
           <div className="metric-container">
             <div className="metric-item">age: "38"</div>
             <div className="metric-item">wieght "40lbs"</div>
 
             <div className="metric-item">height: "5,11"</div>
-            <div className="metric-item">pee: "yellow"</div>
-          </div>
-          <div className="player-overall-content">
-            <div className="item-text">ovr</div>
-            <div className="player-overall-value">{player.overall}77</div>
-          </div>
-          <div className="player-position-content">
-            <div className="item-text">pos</div>
-            <div className="player-position-value">{player.Position}</div>
+            <div className="metric-item">nationality: "France"</div>
           </div>
         </div>
       </div>
