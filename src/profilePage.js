@@ -36,10 +36,25 @@ function ProfilePage() {
       try {
         // Assuming 'international_stats' is the table name
         const { data, error } = await supabase
-          .from("playerStats")
+          .from("player_stats")
           .select("*")
           .eq("id", player1)
           .single();
+
+          const { data:text, error:errortext } = await supabase
+          .from("player_stats")
+          .select("Analysis")
+          .eq("id", player1)
+          .single();
+          if(errortext)
+          {
+            alert("Error fetching player data:" + errortext.message);
+          }
+          else{
+            alert("Good");
+          }
+
+          
 
         if (error) {
           alert("Error fetching player data:" + error);
@@ -242,10 +257,7 @@ function ProfilePage() {
                     </div>
                     <div className="bottoms">
                       <div className="analysis">
-                        Markus Howard, a PG in Spanish ACB, is a sharpshooter
-                        with a strong offensive game. He excels in scoring,
-                        especially from beyond the arc and the free-throw line.
-                        Quick and agile, he's a valuable asset on the court.
+                        {playerData.Analysis}
                       </div>
                       <div className="radar-chart">
                         <RadarChart

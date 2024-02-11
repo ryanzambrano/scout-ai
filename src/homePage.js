@@ -21,10 +21,12 @@ function Card({ player, positionFilter }) {
   }
 
   function goToProfile(player1) {
+    
     navigate(`/profile/${encodeURIComponent(player1)}`);
   }
 
   const handleClick = (player) => {
+
     setIsFlipped(!isFlipped);
     goToProfile(player.id);
   };
@@ -146,13 +148,14 @@ function HomePage() {
 
   const fetchData = async () => {
     const { data, error } = await supabase
-  .from("playerStats")
+  .from("player_stats")
   .select("*");
+  
     if (error) {
       alert(error.message);
     } else {
       if (data.length > 0) {
-        alert(data.length);
+       
         setPlayers(data);
         setFilteredPlayers(data);
         setIsLoading(false);
