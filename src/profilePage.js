@@ -1,10 +1,96 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Bar } from "react-chartjs-2";
+import { Radar } from "react-chartjs-2";
 import { useLocation } from "react-router-dom";
 import { supabase } from "./supabase";
 
 import "./profilePage.css";
+
+import "chart.js/auto";
+
+const RadarChart = () => {
+  const data = {
+    labels: ["Driving", "Playmaking", "Rebounding", "Shooting", "Defending"],
+
+    datasets: [
+      {
+        label: " ",
+        data: [70, 50, 90, 35, 90],
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: "rgba(255, 200, 132, 1)",
+        borderWidth: 1,
+        color: "black",
+        borderColor: "orange", // Line color
+        pointBackgroundColor: "white", // Point fill color
+        pointBorderColor: "black", // Point border color
+        pointHoverBackgroundColor: "#fff", // Point hover fill color
+        pointHoverBorderColor: "black",
+      },
+    ],
+  };
+
+  const options = {
+    scales: {
+      r: {
+        pointLabels: {
+          color: "white", // Sets the color of the point labels (Value 1, Value 2, etc.) to black
+          font: {
+            size: 15, // Adjusts the font size, if needed
+            // You can specify other font properties here
+          },
+          // Include additional pointLabels styling here if needed
+        },
+        angleLines: {
+          display: true,
+        },
+
+        grid: {
+          color: "#11111",
+          lineWidth: 1, // Changes the grid lines to black
+        },
+        ticks: {
+          color: "black", // Tick labels (values) color
+          font: {
+            size: 12, // Example: setting the font size
+          },
+          // Additional customization for ticks can go here
+        },
+        suggestedMin: 0,
+        suggestedMax: 100,
+        ticks: {
+          // Change the tick marks to be bold and red
+          color: "black", // Color of the tick labels
+          font: {
+            size: 10, // Font size
+            style: "italic", // Font style
+            family: "Arial", // Font family
+          },
+          // Include a callback to format tick labels, e.g., adding a unit
+        },
+      },
+    },
+    elements: {
+      line: {
+        borderWidth: 7,
+        color: "black",
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+        labels: {
+          // Customizing legend labels (e.g., the dataset label)
+          color: "blue", // Sets the color of the text
+          font: {
+            size: 20, // Sets font size
+          },
+        },
+      },
+    },
+  };
+
+  return <Radar data={data} options={options} />;
+};
 
 function ProfilePage() {
   const [playerData, setPlayerData] = useState(null);
@@ -143,7 +229,7 @@ function ProfilePage() {
         <div>Loading...</div> // Placeholder for your loading indicator
       ) : (
         <>
-          <div className="name">name</div>
+          <div className="name">{playerData.Player}</div>
           <div className="card">
             <div className="cardheader">
               <div
@@ -152,14 +238,7 @@ function ProfilePage() {
               >
                 Stats
               </div>
-              <div
-                className={`tab ${
-                  selectedTab === "Prediction" ? "selected" : ""
-                }`}
-                onMouseEnter={() => setSelectedTab("Prediction")}
-              >
-                Prediction
-              </div>
+
               <div
                 className={`tab ${
                   selectedTab === "Overview" ? "selected" : ""
@@ -199,27 +278,18 @@ function ProfilePage() {
                   </table>
                 </div>
               )}
-              {selectedTab === "Prediction" && <div>hi</div>}
 
               {selectedTab === "Overview" && (
-                <div className="player_content">
-                  <div className="profile">
+                <div className="column">
+                  <div className="player_content">
                     <div className="player1-content">
-                      <img
-                        src={
-                          "https://cdn.nba.com/headshots/nba/latest/1040x760/1630581.png"
-                        }
-                      />
                       <div className="player1-overall-content">
                         <div className="item1-text">OVR</div>
                         <div
                           className="player1-overall-value"
                           style={{
                             "--fill-percentage": `${overall}%`,
-                            background: `conic-gradient(${getFillColor(
-                              overall
-                            )} var(--fill-percentage, 100%), transparent 0)`,
-                            transform: "rotateY(180deg)",
+                            background: `${getFillColor(overall)}`,
                           }}
                         >
                           <div className="player1-overall-value1">90</div>
@@ -228,16 +298,20 @@ function ProfilePage() {
                       <div className="player1-position-content">
                         <div className="item1-text">POS</div>
                         <div className="player1-position-value">
-                          {player1.Position}
+                          {playerData.Position}
                         </div>
                       </div>
                     </div>
+                    <div className="metric-container">
+                      <div className="metric-item">age: "38"</div>
+                      <div className="metric-item">wieght "40lbs"</div>
+
+                      <div className="metric-item">height: "5,11"</div>
+                      <div className="metric-item">nationality: "France"</div>
+                    </div>
                   </div>
-                  <div classname="otherplayercontent">
-                    <div className="player_content_text">analysis</div>
-                  </div>
-                  <div classname="otherplayercontent">
-                    <div className="player_content_circle1">Graph</div>
+                  <div className="radar-chart">
+                    <RadarChart />
                   </div>
                 </div>
               )}
