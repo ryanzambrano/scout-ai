@@ -124,15 +124,21 @@ def extractPlayerInfo(url):
 
         #Get name of player
         div_element = soup.find('div', class_='half-column-left')
-        name_element = div_element.find('h2')
-        name = name_element.get_text(strip=True)
-        player_info['name'] = name
+        if div_element:
+            name_element = div_element.find('h2')
+            name = name_element.get_text(strip=True)
+            player_info['name'] = name
+        else:
+            player_info['name'] = 'N/A'
 
         #Get image url
         img_element = soup.select_one('.profile-box .half-column-left img')
-        img_src = img_element['src'] if img_element else None
-        img_src = 'https://basketball.realgm.com/' + img_src
-        player_info['img_url'] = img_src
+        if img_element:
+            img_src = img_element['src'] if img_element else None
+            img_src = 'https://basketball.realgm.com/' + img_src
+            player_info['img_url'] = img_src
+        else:
+            player_info['img_url'] = 'N/A'
 
         #Get age value
         age_element = soup.select_one('.profile-box .half-column-left p:-soup-contains("Born:")')
@@ -145,43 +151,50 @@ def extractPlayerInfo(url):
 
         #Get height value
         height_element = soup.select_one('.profile-box .half-column-left p:-soup-contains("Height:")')
-        height_text = height_element.get_text(strip=True)
-        height_index = height_text.find("Height:")
-        # If "Height:" is found
-        if height_index != -1:
-            # Extract the substring starting from the position after "Height:"
-            height_text = height_text[height_index + len("Height:"):]
+        if height_element:
+            height_text = height_element.get_text(strip=True)
+            height_index = height_text.find("Height:")
+            # If "Height:" is found
+            if height_index != -1:
+                # Extract the substring starting from the position after "Height:"
+                height_text = height_text[height_index + len("Height:"):]
 
-            # Find the closing parenthesis in the remaining substring
-            parenthesis_index = height_text.find(")")
+                # Find the closing parenthesis in the remaining substring
+                parenthesis_index = height_text.find(")")
 
-            # If a closing parenthesis is found, extract the height value before it
-            if parenthesis_index != -1:
-                height_value = height_text[:parenthesis_index]
+                # If a closing parenthesis is found, extract the height value before it
+                if parenthesis_index != -1:
+                    height_value = height_text[:parenthesis_index]
 
-                # Extract the weight value
-                weight_index = height_text.find("Weight:")
-                weight_text = height_text[weight_index + len("Weight:"):]
+                    # Extract the weight value
+                    weight_index = height_text.find("Weight:")
+                    weight_text = height_text[weight_index + len("Weight:"):]
 
-                # Find the first space in the remaining substring
-                space_index = weight_text.find(" ")
+                    # Find the first space in the remaining substring
+                    space_index = weight_text.find(" ")
 
-                # If a space is found, extract the weight value before it
-                if space_index != -1:
-                    weight_value = weight_text[:space_index]
+                    # If a space is found, extract the weight value before it
+                    if space_index != -1:
+                        weight_value = weight_text[:space_index]
 
-                    # Convert the extracted values to appropriate formats
-                    height_value = height_value.strip()  # Remove leading/trailing whitespaces
-                    height_value = height_value.split(" ")[0]
-                    weight_value = int(weight_value)
-                    player_info['height'] = height_value
-                    player_info['weight'] = weight_value
+                        # Convert the extracted values to appropriate formats
+                        height_value = height_value.strip()  # Remove leading/trailing whitespaces
+                        height_value = height_value.split(" ")[0]
+                        weight_value = int(weight_value)
+                        player_info['height'] = height_value
+                        player_info['weight'] = weight_value
+        else:
+            player_info['height'] = 'N/A'
+            player_info['weight'] = 'N/A'
 
         #Get nationality
         nationality_element = soup.select_one('.profile-box .half-column-left p:-soup-contains("Nationality:")')
-        nationality_text = nationality_element.get_text(strip=True)
-        nationality_value = nationality_text.split(':')[-1].strip()
-        player_info['nationality'] = nationality_value
+        if nationality_element:
+            nationality_text = nationality_element.get_text(strip=True)
+            nationality_value = nationality_text.split(':')[-1].strip()
+            player_info['nationality'] = nationality_value
+        else:
+            player_info['nationality'] = 'N/A'
 
     return player_info
 
