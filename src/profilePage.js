@@ -1,11 +1,14 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Bar } from "react-chartjs-2";
+import { useLocation } from "react-router-dom";
 
 import "./profilePage.css";
 
 function ProfilePage() {
-  const { player } = useParams();
+  const location = useLocation();
+  let { player1 } = useParams();
+  //alert(player1);
   const [selectedTab, setSelectedTab] = useState("Stats");
   const barChartData = {
     labels: [
@@ -67,8 +70,6 @@ function ProfilePage() {
     "Turnovers",
     "Person Fouls",
   ];
-  
-  
 
   return (
     <div className="container">
@@ -122,27 +123,25 @@ function ProfilePage() {
               </table>
             </div>
           )}
-          {selectedTab === "Prediction" && (
-  <div>
-    hi
-  </div>
-)}
+          {selectedTab === "Prediction" && <div>hi</div>}
 
-          {selectedTab === "Overview" && (( <div className="player_content">
-        <div className="profile">
-        <img src={'https://cdn.nba.com/headshots/nba/latest/1040x760/1630581.png'} />
-        </div>
-       < div classname="otherplayercontent">
-       <div className="player_content_text">
-          analysis
-        </div>
-       </div>
-       < div classname="otherplayercontent">
-        <div className="player_content_circle1">
-          Graph
-        </div>
-       </div>
-      </div>))}
+          {selectedTab === "Overview" && (
+            <div className="player_content">
+              <div className="profile">
+                <img
+                  src={
+                    "https://cdn.nba.com/headshots/nba/latest/1040x760/1630581.png"
+                  }
+                />
+              </div>
+              <div classname="otherplayercontent">
+                <div className="player_content_text">analysis</div>
+              </div>
+              <div classname="otherplayercontent">
+                <div className="player_content_circle1">Graph</div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

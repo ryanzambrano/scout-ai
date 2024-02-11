@@ -19,14 +19,13 @@ function Card({ player }) {
     }
   }
 
-  function goToProfile(player) {
-    alert(player.League);
-     navigate(`/profile/${encodeURIComponent(player)}`);
+  function goToProfile(player1) {
+    navigate(`/profile/${encodeURIComponent(player1)}`);
   }
 
   const handleClick = (player) => {
     setIsFlipped(!isFlipped);
-    goToProfile(player);
+    goToProfile(player.Player);
   };
 
   return (
