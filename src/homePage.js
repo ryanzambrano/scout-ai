@@ -3,10 +3,11 @@ import { supabase } from "./supabase.js";
 import "./homePage.css";
 import { useNavigate } from "react-router-dom";
 
-function Card({ player }) {
+function Card({ player, positionFilter }) {
   const [isFlipped, setIsFlipped] = useState(false);
   let navigate = useNavigate();
-  let overall = 90;
+
+  
 
 
   function getFillColor(percentage) {
@@ -28,32 +29,63 @@ function Card({ player }) {
     goToProfile(player.id);
   };
 
+
+
   return (
     <div className="card-container" onClick={() => handleClick(player)}>
       <div className="player-card">
         <div className="player-name">
           {player.Player} <div className="player-lg">{player.League}</div>
         </div>
-
+  
         <div className="player-content">
-          <img
-            className="player-image"
-            src="https://cdn.nba.com/headshots/nba/latest/1040x760/202710.png"
-          />
-
+          <img className="player-image" src={player.img_url} />
+  
           <div className="player-overall-content">
             <div className="item-text">OVR</div>
             <div
               className="player-overall-value"
               style={{
-                "--fill-percentage": `${player.SmallForwardRating}%`,
+                "--fill-percentage": (() => {
+                  switch (positionFilter) {
+                    case "PG":
+                      return `${player.PointGuardRating}%`;
+                    case "SG":
+                      return `${player.ShootingGuardRating}%`;
+                    case "SF":
+                      return `${player.SmallForwardRating}%`;
+                    case "C":
+                      return `${player.CenterRating}%`;
+                    case "PF":
+                      return `${player.PowerForwardRating}%`;
+                    default:
+                      return "0%";
+                  }
+                })(),
                 background: `conic-gradient(${getFillColor(
-                  player.SmallForwardRating
+                  player.ShootingGuardRating
                 )} var(--fill-percentage, 100%), transparent 0)`,
                 transform: "rotateY(180deg)",
               }}
             >
-              <div className="player-overall-value1">{player.SmallForwardRating}</div>
+              <div className="player-overall-value1">
+                {(() => {
+                  switch (positionFilter) {
+                    case "PG":
+                      return player.PointGuardRating;
+                    case "SG":
+                      return player.ShootingGuardRating;
+                    case "SF":
+                      return player.SmallForwardRating;
+                    case "C":
+                      return player.CenterRating;
+                    case "PF":
+                      return player.PowerForwardRating;
+                    default:
+                      return 0;
+                  }
+                })()}
+              </div>
             </div>
           </div>
           <div className="player-position-content">
@@ -61,16 +93,17 @@ function Card({ player }) {
             <div className="player-position-value">{player.Position}</div>
           </div>
           <div className="metric-container">
-            <div className="metric-item">age: "38"</div>
-            <div className="metric-item">wieght "40lbs"</div>
-
-            <div className="metric-item">height: "5,11"</div>
-            <div className="metric-item">nationality: "France"</div>
+            <div className="metric-item">{player.age}</div>
+            <div className="metric-item">{player.weight}</div>
+            <div className="metric-item">{player.height}</div>
+            <div className="metric-item">{player.nationality}</div>
           </div>
         </div>
       </div>
     </div>
   );
+  
+  
 }
 
 function HomePage() {
@@ -78,22 +111,28 @@ function HomePage() {
   const [filteredPlayers, setFilteredPlayers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [player, setPlayer] = useState("");
-  const [positionFilter, setPositionFilter] = useState(""); // Added state for position filter
+  const [overall, setoverall] = useState("player.PointGuardRating");
+  const [positionFilter, setPositionFilter] = useState("PG"); // Added state for position filter
 
   const handleSearch = (event) => {
     const { value } = event.target;
     setSearchTerm(value);
+    
     if (!value) {
       setFilteredPlayers([]);
     } else {
       // Map through players to access the Player property, then filter
       const filtered = players.filter(
-        (player) => player.Player.toLowerCase().includes(value.toLowerCase()) // Assuming each player has a 'name' property
+        (player) => player.Player.toLowerCase().includes(value.toLowerCase())
       ); // Filter player names
-
-      setFilteredPlayers(filtered.slice(0, 10));
-      //alert(filtered[0]);
+  
+      // Sort the filtered array by SmallForwardRating
+    
+  
+      // Take the first 10 results
+      const sliced = filtered.slice(0, 10);
+  
+      setFilteredPlayers(sliced);
       // Update state with filtered players, up to 10
     }
   };
@@ -101,6 +140,9 @@ function HomePage() {
   useEffect(() => {
     fetchData();
   }, []);
+  useEffect(() => {
+    
+  }, [positionFilter]);
 
   const fetchData = async () => {
     const { data, error } = await supabase
@@ -150,7 +192,7 @@ function HomePage() {
       />
       {searchTerm && (
         <div className="column">
-          {filteredPlayers.map((player, index) => (
+          {filteredPlayers.slice(10,0).map((player, index) => (
             <div
               key={index}
               onClick={() => {
@@ -183,7 +225,7 @@ function HomePage() {
         <div className="player-list">
           <div className="player-list">
             {filteredPlayers.slice(0, 5).map((player, index) => (
-              <Card key={player.id || index} player={player} />
+              <Card key={player.id || index} player={player} positionFilter = {positionFilter} />
             ))}
           </div>
         </div>
