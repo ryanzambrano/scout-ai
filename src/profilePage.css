@@ -90,26 +90,22 @@
     margin-top: 100px;
   }
 
-  .player_content_circle {
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Add this line to center content vertically */
-    background-color: green;
-    font-size:50px;
-  }
+
   .player_content_circle1 {
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
+    height: 300px;
+    width: 300px;
+    margin-top: 40px;
+    position: relative;
+    background-color: red;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     display: flex;
     justify-content: center;
-    align-items: center; /* Add this line to center content vertically */
-    background-color: maroon;
-    font-size:50px;
+    align-items: center;
+    font-size: 50px;
+   /* Adjust text color as needed */
   }
+  
+
   .statsContent {
     display: flex;
     flex-direction: row;

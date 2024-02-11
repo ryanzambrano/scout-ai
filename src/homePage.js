@@ -20,7 +20,8 @@ function Card({ player }) {
   }
 
   function goToProfile(player) {
-    navigate(`/profile/${encodeURIComponent(player)}`);
+    alert(player.League);
+     navigate(`/profile/${encodeURIComponent(player)}`);
   }
 
   const handleClick = (player) => {
