@@ -154,17 +154,6 @@ body {
   position: relative; /* Needed for absolute positioning of the pseudo-element */
 }
 
-/*.metric-container::after {
-  content: "";
-  position: absolute;
-  left: 50%; /* Position the line in the middle 
-  transform: translateX(-50%); /* Center the line exactly 
-  top: 0;
-  bottom: 0;
-  width: 2px; /* Width of the Y-axis line 
-  background-color: #ccc; /* Color of the Y-axis line 
-}*/
-
 .metric-item {
   color: rgba(255, 255, 255, 0.841);
   font-size: 20px;

@@ -2,59 +2,73 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Bar } from "react-chartjs-2";
 import { useLocation } from "react-router-dom";
-import { supabase } from './supabase';
+import { supabase } from "./supabase";
 
 import "./profilePage.css";
 
 function ProfilePage() {
   const [playerData, setPlayerData] = useState(null);
   const [playerarray, setPlayerarray] = useState(null);
-  
+  const [isLoading, setIsLoading] = useState(true);
+
   const location = useLocation();
   let { player1 } = useParams();
+  let overall = 90;
+  let array = [null];
+  function getFillColor(percentage) {
+    if (percentage > 75) {
+      return "green";
+    } else if (percentage > 50) {
+      return "yellow";
+    } else {
+      return "red";
+    }
+  }
+
   useEffect(() => {
     const fetchPlayerData = async () => {
       try {
         // Assuming 'international_stats' is the table name
         const { data, error } = await supabase
-          .from('international_stats')
-          .select()
-          .eq('id', player1)
+          .from("international_stats")
+          .select("*")
+          .eq("id", player1)
           .single();
 
         if (error) {
-          alert(error);
-          console.error('Error fetching player data:', error);
+          alert("Error fetching player data:" + error);
         } else {
           setPlayerData(data);
-          const array = [
-            playerData.GP,
-            playerData.MPG,
-            playerData.PPG,
-            playerData.FGM,
-            playerData.FGA,
-            playerData['FG%'],  // Use square bracket notation for property with "%"
-            playerData['3PM'],   // Use square bracket notation for property with "%"
-            playerData['3PA'],   // Use square bracket notation for property with "%"
-            playerData['3P%'],   // Use square bracket notation for property with "%"
-            playerData.FTM,
-            playerData.FTA,
-            playerData['FT%'],   // Use square bracket notation for property with "%"
-            playerData.ORB,
-            playerData.DRB,
-            playerData.RPG,
-            playerData.APG,
-            playerData.SPG,
-            playerData.BPG,
-            playerData.TOV,
-            playerData.PF
-          ];          
-      
-          setPlayerarray(array);
-          alert(playerarray[0]);
+          array = [
+            data.GP,
+            data.MPG,
+            data.PPG,
+            data.FGM,
+            data.FGA,
+            data["FG%"], // Use square bracket notation for property with "%"
+            data["3PM"],
+            data["3PA"],
+            data["3P%"],
+            data.FTM,
+            data.FTA,
+            data["FT%"],
+            data.ORB,
+            data.DRB,
+            data.RPG,
+            data.APG,
+            data.SPG,
+            data.BPG,
+            data.TOV,
+            data.PF,
+          ];
+
+          //alert(playerarray[0]);
         }
       } catch (error) {
-        console.error('Error fetching player data:', error.message);
+        alert("nothing to do");
+      } finally {
+        setPlayerarray(array);
+        setIsLoading(false);
       }
     };
 
@@ -122,81 +136,115 @@ function ProfilePage() {
     "Turnovers",
     "Person Fouls",
   ];
-  
 
   return (
     <div className="container">
-      <div className="name">name</div>
-      <div className="card">
-        <div className="cardheader">
-          <div
-            className={`tab ${selectedTab === "Stats" ? "selected" : ""}`}
-            onMouseEnter={() => setSelectedTab("Stats")}
-          >
-            Stats
-          </div>
-          <div
-            className={`tab ${selectedTab === "Prediction" ? "selected" : ""}`}
-            onMouseEnter={() => setSelectedTab("Prediction")}
-          >
-            Prediction
-          </div>
-          <div
-            className={`tab ${selectedTab === "Overview" ? "selected" : ""}`}
-            onMouseEnter={() => setSelectedTab("Overview")}
-          >
-            Overview
-          </div>
-        </div>
-
-        <div className="tabContent">
-          {selectedTab === "Stats" && (
-            <div className="statsContent">
-              <table>
-                <tbody>
-                  {Array.from(
-                    { length: tableData.length / 4 },
-                    (_, rowIndex) => (
-                      <tr key={rowIndex}>
-                        {Array.from({ length: 4 }, (_, colIndex) => {
-                          const dataIndex = rowIndex * 4 + colIndex;
-                          return (
-                            <td key={colIndex}>
-                              <div className="boxNumber">{playerarray[dataIndex]}</div>
-                              <div className="boxText">
-                                {tableData[dataIndex]}
-                              </div>
-                            </td>
-                          );
-                        })}
-                      </tr>
-                    )
-                  )}
-                </tbody>
-              </table>
-            </div>
-          )}
-          {selectedTab === "Prediction" && <div>hi</div>}
-
-          {selectedTab === "Overview" && (
-            <div className="player_content">
-              <div className="profile">
-                <img
-                  src={
-                    "https://cdn.nba.com/headshots/nba/latest/1040x760/1630581.png"
-                  }
-                />
+      {isLoading ? (
+        <div>Loading...</div> // Placeholder for your loading indicator
+      ) : (
+        <>
+          <div className="name">name</div>
+          <div className="card">
+            <div className="cardheader">
+              <div
+                className={`tab ${selectedTab === "Stats" ? "selected" : ""}`}
+                onMouseEnter={() => setSelectedTab("Stats")}
+              >
+                Stats
               </div>
-              <div classname="otherplayercontent">
-                <div className="player_content_text">analysis</div>
+              <div
+                className={`tab ${
+                  selectedTab === "Prediction" ? "selected" : ""
+                }`}
+                onMouseEnter={() => setSelectedTab("Prediction")}
+              >
+                Prediction
               </div>
-              <div classname="otherplayercontent">
-                <div className="player_content_circle1">Graph</div>
+              <div
+                className={`tab ${
+                  selectedTab === "Overview" ? "selected" : ""
+                }`}
+                onMouseEnter={() => setSelectedTab("Overview")}
+              >
+                Overview
               </div>
             </div>
-          )}
-        </div>
-      </div>
+
+            <div className="tabContent">
+              {selectedTab === "Stats" && (
+                <div className="statsContent">
+                  <table>
+                    <tbody>
+                      {Array.from(
+                        { length: tableData.length / 4 },
+                        (_, rowIndex) => (
+                          <tr key={rowIndex}>
+                            {Array.from({ length: 4 }, (_, colIndex) => {
+                              const dataIndex = rowIndex * 4 + colIndex;
+                              return (
+                                <td key={colIndex}>
+                                  <div className="boxNumber">
+                                    {playerarray[dataIndex]}
+                                  </div>
+                                  <div className="boxText">
+                                    {tableData[dataIndex]}
+                                  </div>
+                                </td>
+                              );
+                            })}
+                          </tr>
+                        )
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              {selectedTab === "Prediction" && <div>hi</div>}
+
+              {selectedTab === "Overview" && (
+                <div className="player_content">
+                  <div className="profile">
+                    <div className="player1-content">
+                      <img
+                        src={
+                          "https://cdn.nba.com/headshots/nba/latest/1040x760/1630581.png"
+                        }
+                      />
+                      <div className="player1-overall-content">
+                        <div className="item1-text">OVR</div>
+                        <div
+                          className="player1-overall-value"
+                          style={{
+                            "--fill-percentage": `${overall}%`,
+                            background: `conic-gradient(${getFillColor(
+                              overall
+                            )} var(--fill-percentage, 100%), transparent 0)`,
+                            transform: "rotateY(180deg)",
+                          }}
+                        >
+                          <div className="player1-overall-value1">90</div>
+                        </div>
+                      </div>
+                      <div className="player1-position-content">
+                        <div className="item1-text">POS</div>
+                        <div className="player1-position-value">
+                          {player1.Position}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div classname="otherplayercontent">
+                    <div className="player_content_text">analysis</div>
+                  </div>
+                  <div classname="otherplayercontent">
+                    <div className="player_content_circle1">Graph</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
