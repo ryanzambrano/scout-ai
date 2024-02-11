@@ -184,6 +184,7 @@
   }
 
   .player1-content {
+    margin-top: -10px;
     display:flex;
     justify-content: center;
     align-self: center;
@@ -303,6 +304,10 @@
     align-items: center;
     gap: 30px;
    }
+
+
    .analysis {
     width: 30%;
+    font-weight: 500;
+    color:white;
    }

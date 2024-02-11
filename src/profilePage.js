@@ -41,20 +41,15 @@ function ProfilePage() {
           .eq("id", player1)
           .single();
 
-          const { data:text, error:errortext } = await supabase
+        const { data: text, error: errortext } = await supabase
           .from("player_stats")
           .select("Analysis")
           .eq("id", player1)
           .single();
-          if(errortext)
-          {
-            alert("Error fetching player data:" + errortext.message);
-          }
-          else{
-            alert("Good");
-          }
-
-          
+        if (errortext) {
+          alert("Error fetching player data:" + errortext.message);
+        } else {
+        }
 
         if (error) {
           alert("Error fetching player data:" + error);
@@ -256,9 +251,7 @@ function ProfilePage() {
                       </div>
                     </div>
                     <div className="bottoms">
-                      <div className="analysis">
-                        {playerData.Analysis}
-                      </div>
+                      <div className="analysis">{playerData.Analysis}</div>
                       <div className="radar-chart">
                         <RadarChart
                           data={{
