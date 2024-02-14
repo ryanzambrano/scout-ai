@@ -1,20 +1,38 @@
 .card {
-  background-color: grey;
+  background-color: #fff;
+  color: black;
   display: flex;
   flex-direction: column;
-  height: 70vh;
+  height: 70%;
+  min-height: 494px;
   border-radius: 5%;
   overflow: hidden;
 }
 
+.column {
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+}
 .container {
-  margin: 150px;
+  margin: 50px;
 }
 .cardheader {
   display: flex;
   flex-direction: row;
   justify-content: center;
   border-radius: 5%;
+}
+
+.player-profile {
+  font-size: 45px;
+  font-weight: 600;
+  border-width: 0;
+  text-align: center;
+  border-bottom-width: 5px;
+  border-style: solid;
+  color:rgb(0, 0, 0);
+  margin-bottom: 50px;
 }
 
 .tab {
@@ -28,16 +46,16 @@
   align-items: center; /* If you want to center the content vertically */
   color: white;
   transition: background-color 0.3s; 
-  background-color:  #1a1a1a;
+  background-color:rgb(112, 32, 32);
   cursor: pointer;
    /* Include padding and border in the width calculation */
 }
 .tab:hover,
 .tab.selected  {
-  background-color: #404040; /* Grey color */
+  background-color:rgb(165, 46, 46); /* Grey color */
 }
 .tabmiddle:hover.tabmiddle.selected {
-  background-color: #404040; /* Grey color */
+  background-color:rgb(151, 43, 43);; /* Grey color */
 }
 .tabmiddle {
   width: 100%;
@@ -63,7 +81,9 @@
   display: flex;
   justify-content: center;
   font-size: 50px;
-  color: white;
+  color:rgb(112, 32, 32);
+  --color: black;
+  font-weight: 600;
 }
 
 .profile {
@@ -79,28 +99,27 @@
 
 .player_content {
   display: flex;
+  flex:1;
   align-items: center; /* Align items to the bottom of the container */
   justify-content: center;
-  margin-left: 20px;
-  margin-right: 40px;
+  --margin-left: 20px;
+  --margin-right: 40px;
   align-self:center;
 }
 
 .player1_content {
   display: flex;
   align-items: center; /* Align items to the bottom of the container */
-  justify-content: center;
-  margin-left: 20px;
-  margin-right: 40px;
+  justify-content: space-evenly;
+  
   align-self:center;
-  padding-top: 50px;
+  padding-top: 10px;
   border-bottom: black;
   border-style: solid;
   border-left: transparent;
   border-right: transparent;
   border-top: transparent;
-
-
+  width: 90%;
 }
 
 .player_content_text{
@@ -133,31 +152,39 @@
 
 
 .statsContent {
-  display: flex;
-  flex-direction: row;
+  --display: flex;
+  --flex-direction: row;
   align-items: flex-end; /* Align items at the bottom of the container */
 }
 
 
 table {
+  display: flex;
+  flex-direction: column;
+  border-collapse: collapse;
   width: 100%;
   height: 100%;
-  border-collapse: collapse;
 }
 
 td {
+ 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   border: 1px solid black;
-  padding: 28px;
-  width: 25%; /* Set the width to 25% to create 4 evenly spaced columns */
+  --border-bottom: 0ch;
+  width: 25%;
   color: white;
   font-weight: bold;
   vertical-align: bottom; /* Align the text to the bottom of the cell */
 }
 
 th {
+  --flex: 0;
   background-color: #808080;
   color: white;
   vertical-align: bottom;
+  height: 100%;
 }
 
 /* Add additional styling for evenly spaced lines */
@@ -169,17 +196,27 @@ td:nth-child(odd) {
 tr:nth-child(odd) {
   border-bottom: 1px solid black;
 }
+
+tr {
+  height: 90px;
+  display: flex;
+  flex:1;
+}
+
+tbody {
+  height: 100%;
+}
 .boxNumber {
   font-size: 20px;
   font-weight: bold;
-  color: white;
+  color: black;
   text-align: center;
   margin-bottom: 5px; /* Adjust as needed */
 }
 
 .boxText {
   font-size: 16px;
-  color: white;
+  color: rgb(125, 23, 23);
   text-align: center;
 }
 
@@ -209,7 +246,7 @@ align-self: center;
   border-radius: 50px;
   border-color:transparent;
   font-size: 24px;
-  
+  color: white;
 
 }
 
@@ -231,26 +268,27 @@ align-self: center;
   border-radius: 50px;
   background-color: darkgreen;
  font-size: 24px;
+ color: white;
 }
 
 .item1-text {
 font-size: 24px;
 font-weight: 600;
+color: black;
 }
 
 
-.metric1-container {
-align-self: center;
---margin-top: 10px;
-display: grid;
-grid-template-columns: repeat(2, 1fr); /* This will create 2 columns */
+.metric-container {
+display:flex;
+--align-self: center;
+
 gap: 15px;
-justify-content: flex-start;
-position: relative; /* Needed for absolute positioning of the pseudo-element */
+justify-content: space-between;
+ /* Needed for absolute positioning of the pseudo-element */
 }
 
 .metric1-item {
-color: rgba(255, 255, 255, 0.841);
+color: black;
 font-size: 20px;
 font-weight: 600;
 --align-self: center; /* Aligns items at the start of their cell */
@@ -277,18 +315,19 @@ padding-bottom: 10px;
 }
 /* Add additional styling for evenly spaced lines */
 
-* {
-  color: white;
-}
+
 
 .player1-image {
-  height: 300px;
+  margin: 10px;
+  height: 70%;
+  width:  70%;
+  border-radius: 30px;
  }
 
  .radar-chart {
   align-self: center;
-  width: 400px;
-  height: 400px;
+  --width: 400px;
+  --height: 400px;
  }
  .column {
   display: flex;
@@ -296,7 +335,7 @@ padding-bottom: 10px;
  }
 
  .bottoms {
-  margin-top: -50px;
+  --margin-top: -50px;
   display: flex;
  justify-content: center;
   align-self: center;
@@ -304,5 +343,13 @@ padding-bottom: 10px;
   gap: 30px;
  }
  .analysis {
-  width: 30%;
+  flex: 1;
+  margin-left: 30px;
+  font-weight: 600;
+  color: #2d2d2d;
  }
+
+ 
+body {
+  background-color: rgb(228, 228, 228);
+}
