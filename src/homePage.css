@@ -3,8 +3,8 @@
     flex-direction: column;
     align-items: center;
     --justify-content: center;
-    background-color: #1D1D20;
-    color:white;
+    background-color: rgba(255, 255, 255, 0.909);
+    color:black;
 }
 
 .search-bar {
@@ -25,17 +25,25 @@
 }
 
 .dashboard-title {
-    --background-color: grey;;
+    display:  flex;
+    color: black;
     margin-top: 20px;
-    border-width: 1px;
-    border-color: white;
-    font-size: 23px;
+    border-width: 0em;
+    border-bottom-width: 0px;
+    --border-color: black;
+    font-size: 25px;
     border-style: solid;
-    padding: 20px;
+    padding: 5px;
     width: 30%;
-    border-radius: 10px
+    font-weight: 600;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
 }
-
+.number {
+  color:rgb(47, 25, 0);
+  font-style: italic;
+}
 .player-list {
   display: flex;
   flex-direction: column;
@@ -47,6 +55,7 @@
   align-items: center;
   justify-content: center;
   place-items: center;
+  color: black;
   
 }
 
@@ -55,24 +64,26 @@
     justify-content: center;
     align-self: center;
     padding: 10px;
-    gap: 20px
+    gap: 20px;
+    color:  black;
 }
 
 .player-card {
-  margin-top: 10px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     --backdrop-filter: blur(10px); /* Adjust the px value to control the blur intensity */
-    background-color: rgba(169, 169, 169);    
+    background-color: #fff;    
     align-items: center;
     justify-content: center;
     align-self: center;
     border-radius: 12px;
     --padding: 20px;
     padding-top: 0px;
-    color:white;
+    color: black;
     transition: transform 0.6s;
   transform-style: preserve-3d;
+  color: black;
 }
 
 .player-overall-content {
@@ -118,6 +129,7 @@
 .item-text {
   font-size: 24px;
   font-weight: 600;
+  color: black;
 }
 
 .card-container {
@@ -159,7 +171,7 @@ body {
 }
 
 .metric-item {
-  color: rgba(255, 255, 255, 0.841);
+  color: black;
   font-size: 20px;
   font-weight: 600;
   --align-self: center; /* Aligns items at the start of their cell */
@@ -172,7 +184,7 @@ body {
   border-top-right-radius: 12px;
   --padding: 15px;
   width: 100%;
-  background-color:rgb(161, 161, 154);
+  background-color:rgb(236, 27, 177);
   --display: flex;
   flex: 1;
   display: flex;
@@ -190,7 +202,7 @@ body {
   border-top-right-radius: 12px;
   --padding: 15px;
   width: 100%;
-  background-color:rgb(142, 142, 136);
+  background-color:rgb(112, 32, 32);
   --display: flex;
   flex: 1;
   display: flex;
@@ -219,6 +231,7 @@ body {
   height: 100px;
   align-self: flex-end;
   margin-bottom: 10px;
+  border-radius: 20px;
 }
 
 .player-overall-value {
@@ -282,7 +295,7 @@ select:focus {
 
 
 option {
-  color: white;
+  color: black;
   background-color: grey;
   padding: 10px;
   border-radius: 5px;

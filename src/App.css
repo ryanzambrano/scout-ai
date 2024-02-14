@@ -52,13 +52,13 @@
 .logo {
   --flex: 1;
   width: auto;
-  height: 50px;
+  height: 60px;
   align-self: center;
 }
 
 .nfl {
   --flex: 1;
-  font-size: 25px;
+  font-size: 40px;
   color: white;
   align-self: center;
 
@@ -66,10 +66,11 @@
 
 .scout {
   --flex: 1;
-  color: white;
-  font-size: 25px;
+  color: rgb(255, 255, 255);
+  font-size: 40px;
   align-self: center;
-
+font-weight: 700;
+text-align: center;
 }
 
 .left {

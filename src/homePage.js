@@ -11,7 +11,7 @@ function Card({ player, positionFilter }) {
     if (percentage > 75) {
       return "green";
     } else if (percentage > 50) {
-      return "yellow";
+      return "orange";
     } else {
       return "red";
     }
@@ -78,7 +78,8 @@ function Card({ player, positionFilter }) {
                       return `${player.PointGuardRating}%`;
                   }
                 })(),
-                background: `conic-gradient(${getFillColor(getPlayerRatingBasedOnPosition(positionFilter, player)
+                background: `conic-gradient(${getFillColor(
+                  getPlayerRatingBasedOnPosition(positionFilter, player)
                 )} var(--fill-percentage, 100%), transparent 0)`,
                 transform: "rotateY(180deg)",
               }}
@@ -229,7 +230,9 @@ function HomePage() {
           ))}
         </div>
       )}
-      <div className="dashboard-title">Potenital Prospects</div>
+      <div className="dashboard-title">
+        <div className="number">#2746</div>&nbsp;Potential Prospects
+      </div>
       <select
         onChange={(e) => handleFilterChange(e.target.value)}
         className="position-filter-dropdown"

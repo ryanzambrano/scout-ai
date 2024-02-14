@@ -26,7 +26,7 @@ function ProfilePage() {
     if (percentage > 75) {
       return "green";
     } else if (percentage > 50) {
-      return "yellow";
+      return "orange";
     } else {
       return "red";
     }
@@ -219,60 +219,70 @@ function ProfilePage() {
                         <div className="player1-overall-content">
                           <div className="item1-text">OVR</div>
                           <div
-  className="player1-overall-value"
-  style={{
-    "--fill-percentage": (() => {
-      switch (positionFilter) {
-        case "PG":
-          return `${playerData.PointGuardRating}%`;
-        case "SG":
-          return `${playerData.ShootingGuardRating}%`;
-        case "SF":
-          return `${playerData.SmallForwardRating}%`;
-        case "C":
-          return `${playerData.CenterRating}%`;
-        case "PF":
-          return `${playerData.PowerForwardRating}%`;
-        default:
-          return `${overall}%`; // You might want to replace 'overall' with an appropriate default value
-      }
-    })(),
-    background: (() => {
-      switch (positionFilter) {
-        case "PG":
-          return getFillColor(playerData.PointGuardRating);
-        case "SG":
-          return getFillColor(playerData.ShootingGuardRating);
-        case "SF":
-          return getFillColor(playerData.SmallForwardRating);
-        case "C":
-          return getFillColor(playerData.CenterRating);
-        case "PF":
-          return getFillColor(playerData.PowerForwardRating);
-        default:
-          return getFillColor(overall); // You might want to replace 'overall' with an appropriate default value
-      }
-    })(),
-  }}
->
+                            className="player1-overall-value"
+                            style={{
+                              "--fill-percentage": (() => {
+                                switch (positionFilter) {
+                                  case "PG":
+                                    return `${playerData.PointGuardRating}%`;
+                                  case "SG":
+                                    return `${playerData.ShootingGuardRating}%`;
+                                  case "SF":
+                                    return `${playerData.SmallForwardRating}%`;
+                                  case "C":
+                                    return `${playerData.CenterRating}%`;
+                                  case "PF":
+                                    return `${playerData.PowerForwardRating}%`;
+                                  default:
+                                    return `${overall}%`; // You might want to replace 'overall' with an appropriate default value
+                                }
+                              })(),
+                              background: (() => {
+                                switch (positionFilter) {
+                                  case "PG":
+                                    return getFillColor(
+                                      playerData.PointGuardRating
+                                    );
+                                  case "SG":
+                                    return getFillColor(
+                                      playerData.ShootingGuardRating
+                                    );
+                                  case "SF":
+                                    return getFillColor(
+                                      playerData.SmallForwardRating
+                                    );
+                                  case "C":
+                                    return getFillColor(
+                                      playerData.CenterRating
+                                    );
+                                  case "PF":
+                                    return getFillColor(
+                                      playerData.PowerForwardRating
+                                    );
+                                  default:
+                                    return getFillColor(overall); // You might want to replace 'overall' with an appropriate default value
+                                }
+                              })(),
+                            }}
+                          >
                             <div className="player1-overall-value1">
-                {(() => {
-                  switch (positionFilter) {
-                    case "PG":
-                      return playerData.PointGuardRating;
-                    case "SG":
-                      return playerData.ShootingGuardRating;
-                    case "SF":
-                      return playerData.SmallForwardRating;
-                    case "C":
-                      return playerData.CenterRating;
-                    case "PF":
-                      return playerData.PowerForwardRating;
-                    default:
-                      return playerData.PointGuardRating;
-                  }
-                })()}
-              </div>
+                              {(() => {
+                                switch (positionFilter) {
+                                  case "PG":
+                                    return playerData.PointGuardRating;
+                                  case "SG":
+                                    return playerData.ShootingGuardRating;
+                                  case "SF":
+                                    return playerData.SmallForwardRating;
+                                  case "C":
+                                    return playerData.CenterRating;
+                                  case "PF":
+                                    return playerData.PowerForwardRating;
+                                  default:
+                                    return playerData.PointGuardRating;
+                                }
+                              })()}
+                            </div>
                           </div>
                         </div>
                         <div className="player1-position-content">
