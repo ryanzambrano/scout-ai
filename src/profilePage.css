@@ -5,7 +5,7 @@
   flex-direction: column;
   height: 70%;
   min-height: 494px;
-  border-radius: 5%;
+  border-radius: 30px;
   overflow: hidden;
 }
 
@@ -16,6 +16,10 @@
 }
 .container {
   margin: 50px;
+  justify-content: center;
+  text-align: center;
+  align-self: center;
+  align-items: center;
 }
 .cardheader {
   display: flex;
@@ -29,10 +33,15 @@
   font-weight: 600;
   border-width: 0;
   text-align: center;
-  border-bottom-width: 5px;
+  border-bottom-width: 3px;
   border-style: solid;
   color:rgb(0, 0, 0);
   margin-bottom: 50px;
+  width: 100%;
+  --margin: 100px;
+  --margin-left: 10%;
+  align-self: center;
+  align-items: center;
 }
 
 .tab {
@@ -319,8 +328,9 @@ padding-bottom: 10px;
 
 .player1-image {
   margin: 10px;
-  height: 70%;
-  width:  70%;
+  height: 60%;
+  width:  60%;
+  min-height: 300px;
   border-radius: 30px;
  }
 
@@ -352,4 +362,80 @@ padding-bottom: 10px;
  
 body {
   background-color: rgb(228, 228, 228);
+}
+
+@media screen and (max-width: 700px) {
+  .player_content {
+   display: flex;
+   flex-direction: column;/* Smaller custom left margin */
+   align-self: center;
+   align-items: center;
+   align-content: center;
+   text-align: center;
+  }
+
+  .player1-content {
+    padding: 0;
+    align-self: center;
+   align-items: center;
+   align-content: center;
+   text-align: center;
+  }
+
+  .player1_content {
+    padding: 0;
+    font-size: 15px;
+    align-self: center;
+   align-items: center;
+   align-content: center;
+   text-align: center;
+  }
+  .metric-item {
+    font-size: 15px;
+  }
+
+  .item1-text {
+    font-size: 15px;
+  }
+
+  .bottoms {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 20px;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+    padding-left: 0;
+  }
+
+  @media screen and (max-width: 500px) {
+    .player1_content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .boxText {
+      font-size: 12px;
+    }
+
+    .boxNumber {
+      font-size: 12px;
+    }
+
+    .radar-chart {
+      align-self: center;
+      align-items: center;
+      text-align: center;
+      margin-left: 20px;
+    }
+    .player1-image {
+      margin: 10px;
+      --width:  10%;
+      height: 10% !important;
+      min-height: 300px;
+      border-radius: 30px;
+  }
+}
 }

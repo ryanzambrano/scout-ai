@@ -134,7 +134,7 @@
 
 .card-container {
   perspective: 1000px; /* Gives a 3D effect */
-  width: 600px;
+  width: 70%;
   overflow: hidden;
   justify-content: space-between; /* Clips content that exceeds the container's dimensions */
 }
@@ -304,4 +304,42 @@ option {
 
 option:focus {
   outline: none; /* Optional: Removes the default focus outline */
+}
+
+@media screen and (max-width: 500px) {
+  
+  .player-content {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .metric-container {
+    display: grid !important;
+    
+    --grid-template-columns: repeat(2, 1fr); /* Creates 4 columns */
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .player-image {
+    width: auto;
+    height: 200px;
+    align-self: center;
+    margin-bottom: 10px;
+    border-radius: 20px;
+  }
+
+  .player-position-content {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .player-overall-content {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .dashboard-title {
+    flex-direction: column;
+  }
 }

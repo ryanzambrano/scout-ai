@@ -117,7 +117,7 @@ function ProfilePage() {
     }
   }
   //alert(player1);
-  const [selectedTab, setSelectedTab] = useState("Stats");
+  const [selectedTab, setSelectedTab] = useState("Overview");
   const barChartData = {
     labels: [
       "Points Per Game",
