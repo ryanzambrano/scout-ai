@@ -207,9 +207,14 @@ function HomePage() {
 
   return (
     <div className="dashboard-hero-section">
-      <input
+     <img className="header" src={"https://cdn.worldvectorlogo.com/logos/vectorizationeu.svg"} />
+     <div className = "tagline">Where talent knows no borders, and scouting knows no limits</div>
+     <div className="dashboard-title">
+        <div className="number">#2746</div>&nbsp;Potential Prospects
+      </div>
+     <div className = "search-container"> <input
         className="search-bar"
-        placeholder="search"
+        placeholder="Search for a player..."
         value={searchTerm}
         onChange={handleSearch}
       />
@@ -230,9 +235,7 @@ function HomePage() {
           ))}
         </div>
       )}
-      <div className="dashboard-title">
-        <div className="number">#2746</div>&nbsp;Potential Prospects
-      </div>
+      
       <select
         onChange={(e) => handleFilterChange(e.target.value)}
         className="position-filter-dropdown"
@@ -242,7 +245,8 @@ function HomePage() {
         <option value="SF">Small Forward</option>
         <option value="PF">Power Forward</option>
         <option value="C">Center</option>
-      </select>{" "}
+      </select></div>
+     {" "}
       {isLoading ? (
         <div>Loading...</div> // Placeholder for your loading indicator
       ) : (
