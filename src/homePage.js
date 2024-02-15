@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "./supabase.js";
 import "./homePage.css";
 import { useNavigate } from "react-router-dom";
-
+import logo from "./logo.png";
 function Card({ player, positionFilter }) {
   const [isFlipped, setIsFlipped] = useState(false);
   let navigate = useNavigate();
@@ -207,42 +207,52 @@ function HomePage() {
 
   return (
     <div className="dashboard-hero-section">
-      <input
-        className="search-bar"
-        placeholder="search"
-        value={searchTerm}
-        onChange={handleSearch}
-      />
-      {searchTerm && (
-        <div className="column">
-          {filteredPlayers.slice(10, 0).map((player, index) => (
-            <div
-              key={index}
-              onClick={() => {
-                setSearchTerm(player);
-                setFilteredPlayers([]);
-              }}
-            >
-              {filteredPlayers.map((player, index) => (
-                <Card key={player.id || index} player={player} /> // Use player.id as key if available, else use index
-              ))}
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="logo-container">
+        <img className="logo" src={logo} />
+        <div className="logo-text">SCOUT GLOBAL</div>
+      </div>
+      <div className="tagline">
+        Where talent knows no borders, and scouting knows no limits
+      </div>
       <div className="dashboard-title">
         <div className="number">#2746</div>&nbsp;Potential Prospects
       </div>
-      <select
-        onChange={(e) => handleFilterChange(e.target.value)}
-        className="position-filter-dropdown"
-      >
-        <option value="PG">Point Guard</option>
-        <option value="SG">Shooting Guard</option>
-        <option value="SF">Small Forward</option>
-        <option value="PF">Power Forward</option>
-        <option value="C">Center</option>
-      </select>{" "}
+      <div className="search-container">
+        {" "}
+        <input
+          className="search-bar"
+          placeholder="Search for a player..."
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+        {searchTerm && (
+          <div className="column">
+            {filteredPlayers.slice(10, 0).map((player, index) => (
+              <div
+                key={index}
+                onClick={() => {
+                  setSearchTerm(player);
+                  setFilteredPlayers([]);
+                }}
+              >
+                {filteredPlayers.map((player, index) => (
+                  <Card key={player.id || index} player={player} /> // Use player.id as key if available, else use index
+                ))}
+              </div>
+            ))}
+          </div>
+        )}
+        <select
+          onChange={(e) => handleFilterChange(e.target.value)}
+          className="position-filter-dropdown"
+        >
+          <option value="PG">Point Guard</option>
+          <option value="SG">Shooting Guard</option>
+          <option value="SF">Small Forward</option>
+          <option value="PF">Power Forward</option>
+          <option value="C">Center</option>
+        </select>
+      </div>{" "}
       {isLoading ? (
         <div>Loading...</div> // Placeholder for your loading indicator
       ) : (
