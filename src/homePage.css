@@ -6,6 +6,10 @@
     background-color: rgb(228, 228, 228);
     color:black;
 }
+.search-container{
+  width: 90%;
+  margin-bottom: 70px;
+}
 
 .search-bar {
     margin-top: 20px;
@@ -16,9 +20,23 @@
     border-width: 0;
     border-radius: 12px;
     padding: 10px;
-    color:white;
+    color:black;
+    font-family: 'Poppins', sans-serif;
     font-size: 19px;
 }
+.header{
+  display: flex;
+  background-color: rgb(228, 228, 228);
+  width: 50%;
+  
+
+}
+.tagline{
+  font-size: 30px;
+  color: rgb(255, 83, 83);
+  font-family: 'Poppins', sans-serif;
+}
+
 
 .search-bar:focus {
   outline: none; /* Optional: Removes the default focus outline */
@@ -42,7 +60,7 @@
 }
 .number {
   color:rgb(47, 25, 0);
-  font-style: italic;
+  font-family: 'Poppins', sans-serif;
 }
 .player-list {
   display: flex;
@@ -327,6 +345,10 @@ option:focus {
     align-self: center;
     margin-bottom: 10px;
     border-radius: 20px;
+  }
+  .position-filter-dropdown{
+    font-family: 'Poppins', sans-serif;
+    color: black;
   }
 
   .player-position-content {
