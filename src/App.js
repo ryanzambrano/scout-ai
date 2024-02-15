@@ -10,7 +10,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
@@ -23,25 +22,4 @@ function App() {
   );
 }
 
-function Header() {
-  function goToProfile() {
-    navigate("/");
-  }
-  let navigate = useNavigate();
-  return (
-    <div className="header">
-      <div className="left">
-        <button className="nfl" onClick={goToProfile}>
-          <img className="logo" src={logo} alt="Description of the image" />
-        </button>
-      </div>
-      <div className="center">
-        <div className="scout">Scout Global</div>
-      </div>
-      <div className="right">
-        <div className="nfl">NBA</div>
-      </div>
-    </div>
-  );
-}
 export default App;

@@ -1,10 +1,44 @@
+* {
+  --background-color: #fff;
+}
 .dashboard-hero-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     --justify-content: center;
-    background-color: rgb(228, 228, 228);
+    background-color: rgb(255, 255, 255);
     color:black;
+}
+.search-container{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin-bottom: 70px;
+ 
+}
+
+.logo-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  align-self: center;
+}
+
+.logo {
+  height: 120px;
+  align-self: center;
+}
+
+.logo-text {
+  font-size: 80px;
+  font-weight: 800;
+  --padding-bottom: 10px;
+  align-self: center;
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .search-bar {
@@ -16,9 +50,24 @@
     border-width: 0;
     border-radius: 12px;
     padding: 10px;
-    color:white;
+    color:black;
+    font-family: 'Poppins', sans-serif;
     font-size: 19px;
+    margin-right: 10px;
 }
+.header{
+  display: flex;
+  background-color: rgb(228, 228, 228);
+  width: 50%;
+  
+
+}
+.tagline{
+  font-size: 30px;
+  color: rgb(255, 83, 83);
+  font-family: 'Poppins', sans-serif;
+}
+
 
 .search-bar:focus {
   outline: none; /* Optional: Removes the default focus outline */
@@ -42,7 +91,7 @@
 }
 .number {
   color:rgb(47, 25, 0);
-  font-style: italic;
+  font-family: 'Poppins', sans-serif;
 }
 .player-list {
   display: flex;
@@ -73,17 +122,21 @@
     display: flex;
     flex-direction: column;
     --backdrop-filter: blur(10px); /* Adjust the px value to control the blur intensity */
-    background-color: #fff;    
+    background-color: rgba(255, 255, 255, 0.101);    
     align-items: center;
     justify-content: center;
     align-self: center;
-    border-radius: 12px;
+    --border-radius: 12px;
     --padding: 20px;
     padding-top: 0px;
     color: black;
     transition: transform 0.6s;
   transform-style: preserve-3d;
   color: black;
+  border-width: 0;
+  border-bottom-width: 2px;
+  
+  border-style: solid;
 }
 
 .player-overall-content {
@@ -136,7 +189,9 @@
   perspective: 1000px; /* Gives a 3D effect */
   width: 70%;
   overflow: hidden;
-  justify-content: space-between; /* Clips content that exceeds the container's dimensions */
+  justify-content: space-between;
+  border-width: 0;
+  border-bottom: 1px;
 }
 
 
@@ -156,7 +211,7 @@
   }
 
 body {
-  background-color: rgb(228, 228, 228);
+  background-color: #fff;
 }
 
 
@@ -202,7 +257,7 @@ body {
   border-top-right-radius: 12px;
   --padding: 15px;
   width: 100%;
-  background-color:rgb(112, 32, 32);
+  background-color:rgb(160, 51, 0);
   --display: flex;
   flex: 1;
   display: flex;
@@ -284,10 +339,13 @@ body {
 
 select {
   color: white;
-  background-color: grey;
+  background-color: rgb(155, 19, 19);
   padding: 10px;
+  border-width: 0;;
   border-radius: 5px;
   margin-top: 20px;
+  width: 10%;
+  align-self: center;
 }
 
 select:focus {
@@ -328,6 +386,11 @@ option:focus {
     margin-bottom: 10px;
     border-radius: 20px;
   }
+  .position-filter-dropdown{
+    --width: 5px;
+    font-family: 'Poppins', sans-serif;
+    color: black;
+  }
 
   .player-position-content {
     margin-top: 0;
@@ -342,4 +405,6 @@ option:focus {
   .dashboard-title {
     flex-direction: column;
   }
+
+  
 }
