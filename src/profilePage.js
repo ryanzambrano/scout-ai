@@ -181,18 +181,13 @@ function ProfilePage() {
 
   return (
     <div className="container">
-       <div className="header-container">
-      <img className="header" src={"https://cdn.worldvectorlogo.com/logos/vectorizationeu.svg"} alt="Header Image" />
-      <span className="header-text">Player Profile</span>
-    </div>
-    {isLoading ? (
+      <div className="player-profile">Player Profile</div>
+      {isLoading ? (
         <div>Loading...</div> // Placeholder for your loading indicator
       ) : (
         <>
-        <div className="ProfileContentHero">
-      
-      <div className="playermetrics"></div>
-          <div className="card-stats">
+          <div className="name">{playerData.Player}</div>
+          <div className="card">
             <div className="cardheader">
               <div
                 className={`tab ${
@@ -214,9 +209,117 @@ function ProfilePage() {
               {selectedTab === "Overview" && (
                 <>
                   <div className="player_content">
+                    <img className="player1-image" src={playerData.img_url} />
                     <div className="column">
-                    
+                      <div className="player1_content">
+                        <div className="player1-content">
+                          <div className="player1-overall-content">
+                            <div className="item1-text">OVR</div>
+                            <div
+                              className="player1-overall-value"
+                              style={{
+                                "--fill-percentage": (() => {
+                                  switch (positionFilter) {
+                                    case "PG":
+                                      return `${playerData.PointGuardRating}%`;
+                                    case "SG":
+                                      return `${playerData.ShootingGuardRating}%`;
+                                    case "SF":
+                                      return `${playerData.SmallForwardRating}%`;
+                                    case "C":
+                                      return `${playerData.CenterRating}%`;
+                                    case "PF":
+                                      return `${playerData.PowerForwardRating}%`;
+                                    default:
+                                      return `${overall}%`; // You might want to replace 'overall' with an appropriate default value
+                                  }
+                                })(),
+                                background: (() => {
+                                  switch (positionFilter) {
+                                    case "PG":
+                                      return getFillColor(
+                                        playerData.PointGuardRating
+                                      );
+                                    case "SG":
+                                      return getFillColor(
+                                        playerData.ShootingGuardRating
+                                      );
+                                    case "SF":
+                                      return getFillColor(
+                                        playerData.SmallForwardRating
+                                      );
+                                    case "C":
+                                      return getFillColor(
+                                        playerData.CenterRating
+                                      );
+                                    case "PF":
+                                      return getFillColor(
+                                        playerData.PowerForwardRating
+                                      );
+                                    default:
+                                      return getFillColor(overall); // You might want to replace 'overall' with an appropriate default value
+                                  }
+                                })(),
+                              }}
+                            >
+                              <div className="player1-overall-value1">
+                                {(() => {
+                                  switch (positionFilter) {
+                                    case "PG":
+                                      return playerData.PointGuardRating;
+                                    case "SG":
+                                      return playerData.ShootingGuardRating;
+                                    case "SF":
+                                      return playerData.SmallForwardRating;
+                                    case "C":
+                                      return playerData.CenterRating;
+                                    case "PF":
+                                      return playerData.PowerForwardRating;
+                                    default:
+                                      return playerData.PointGuardRating;
+                                  }
+                                })()}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="player1-position-content">
+                            <div className="item1-text">POS</div>
+                            <div className="player1-position-value">
+                              {positionFilter}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="metric-container">
+                          <div className="column">
+                            <div className="metric-item">age:</div>
+                            <div className="metric-item">
+                              "{playerData.age}"
+                            </div>
+                          </div>
+                          <div className="column">
+                            <div className="metric-item">weight:</div>
+                            <div className="metric-item">
+                              "{playerData.weight} lbs"
+                            </div>
+                          </div>
+
+                          <div className="column">
+                            <div className="metric-item">height:</div>
+                            <div className="metric-item">
+                              "{playerData.height}"
+                            </div>
+                          </div>
+
+                          <div className="column">
+                            <div className="metric-item">nationality:</div>
+                            <div className="metric-item">
+                              "{playerData.nationality}"
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       <div className="bottoms">
+                        <div className="analysis">"{playerData.Analysis}"</div>
                         <div className="radar-chart">
                           <RadarChart
                             data={{
@@ -313,7 +416,6 @@ function ProfilePage() {
                         </div>
                       </div>
                     </div>
-                    
                   </div>
                 </>
               )}
@@ -349,17 +451,9 @@ function ProfilePage() {
               )}
             </div>
           </div>
-          <div className="playersynopsis">
-            <div className="playergpt"></div>
-            <div className="playeroverall"></div>
-          </div>
-          </div>
-          
         </>
       )}
-      
     </div>
-     
   );
 }
 
