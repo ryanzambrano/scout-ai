@@ -165,7 +165,6 @@ function HomePage() {
         setPlayers(data);
         setFilteredPlayers(data);
         setIsLoading(false);
-        //alert(data[0].Player); // Alert the id of the first player
       } else {
         setIsLoading(false);
         alert("No players found.");
