@@ -289,7 +289,7 @@ body {
 .player-overall-value {
   position: relative;
   width: 50px; /* Ensure the width and height are equal for a perfect circle */
-  height: 50px;
+  height: 40%;
   padding: 4px;
   border-width: 0;
   border-radius: 50%;
@@ -303,7 +303,7 @@ body {
 .player-overall-value1 {
   position: relative;
   width: 50px; /* Ensure the width and height are equal for a perfect circle */
-  height: 50px;
+  height: 40%;
   border-radius: 50%;
   display: flex;
   justify-content: center;

@@ -191,7 +191,22 @@ function ProfilePage() {
         <>
         <div className="ProfileContentHero">
       
-      <div className="playermetrics"></div>
+      <div className="playermetrics">
+      <div className="playerName">{playerData.Player}</div>
+      <img className="player1-image" src={playerData.img_url}/>
+      <div className="playerweight">
+  <table>
+    <tr>
+      <td>Cell 1</td>
+      <td>Cell 2</td>
+    </tr>
+    <tr>
+      <td class="special-cell1">Hello</td>
+      <td class="special-cell">Cell 4</td>
+    </tr>
+  </table>
+</div>
+      </div>
           <div className="card-stats">
             <div className="cardheader">
               <div
@@ -350,8 +365,8 @@ function ProfilePage() {
             </div>
           </div>
           <div className="playersynopsis">
-            <div className="playergpt"></div>
-            <div className="playeroverall"></div>
+            <div className="playergpt">Player Synopsis</div>
+            <div className="playeroverall">Positional Overall</div>
           </div>
           </div>
           

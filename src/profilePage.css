@@ -21,30 +21,42 @@
   color: black;
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 70%;
-  width: 25%;
-  min-height: 494px;
+  width: 20%;
+  height: 100%;
   border-radius: 30px;
   overflow: hidden;
 }
 .playergpt{
   background-color: #fff;
+  justify-content: center;
+  font-size: 25px; /* Adjust the font size as needed */
+  font-family: 'Poppins', sans-serif;
   color: black;
   display: flex;
   border-radius: 30px;
   overflow: hidden;
   width: 90%;
-  height: 235px;
+  height: 50%;
 }
 .playeroverall{
   background-color: #fff;
+  justify-content: center;
+  font-size: 25px; /* Adjust the font size as needed */
+  font-family: 'Poppins', sans-serif;
   color: black;
   display: flex;
   border-radius: 30px;
   overflow: hidden;
   width: 90%;
-  height: 235px;
+  height: 50%;
   margin-top: 20px;
+}
+.playerName{
+  margin-top: 20px;
+  font-size: 30px; /* Adjust the font size as needed */
+  font-family: 'Poppins', sans-serif;
 }
 .playersynopsis{
   
@@ -61,7 +73,8 @@ justify-content: center;
 }
 .header-container {
   display: flex;
-  align-items: center; /* Center vertically */
+  align-items: center;
+  justify-content: flex-start; /* Align items to the left */
   width: 50%;
 }
 .header-text {
@@ -79,10 +92,10 @@ justify-content: center;
   display: flex;
     flex-direction: column;
     align-items: center;
-    --justify-content: center;
+    justify-content: flex-start;
     background-color: rgb(228, 228, 228);
     color:black;
-    height: 1500px;
+    height: 100vh;
 }
 .cardheader {
   display: flex;
@@ -395,12 +408,49 @@ padding-bottom: 10px;
 
 
 .player1-image {
-  margin: 10px;
-  height: 60%;
-  width:  60%;
-  min-height: 300px;
-  border-radius: 30px;
+  margin-top: 10px;
+  width:  55%;
+  color: black;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  overflow: hidden;
  }
+ .playerweight{
+  width: 55%;
+  background-color: white;
+  height: 20%;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+ }
+ .playerweight table {
+  width: 100%;
+  border-collapse: collapse; /* Optional: Remove cell spacing */
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.playerweight td {
+  justify-content: center;
+  border: 1px solid black;
+  width: 100%;
+}
+
+.playerweight .special-cell {
+  justify-content: center;
+  align-content: center;
+  /* Add specific styles for Cell 3 and Cell 4 here */
+  border: 1px solid black;
+  width: 100%;
+  border-bottom-right-radius: 30px;
+}
+.playerweight .special-cell1 {
+  justify-content: center;
+  align-content: center;
+  /* Add specific styles for Cell 3 and Cell 4 here */
+  border: 1px solid black;
+  width: 100%;
+  border-bottom-left-radius: 30px;
+}
 
  .radar-chart {
   align-self: center;
