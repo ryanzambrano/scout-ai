@@ -197,17 +197,18 @@ function ProfilePage() {
             <div className="playermetrics">
               <div className="playerName">{playerData.Player}</div>
               <img className="player1-image" src={playerData.img_url} />
-              <div className="playerweight">
-                <table>
-                  <tr>
-                    <td>Cell 1</td>
-                    <td>Cell 2</td>
-                  </tr>
-                  <tr>
-                    <td class="special-cell1">Hello</td>
-                    <td class="special-cell">Cell 4</td>
-                  </tr>
-                </table>
+
+              <div className="column1">
+                <div className="item-metric">
+                  Nationality: "{playerData.nationality}""
+                </div>
+                <div className="item-metric">Age: "{playerData.age}"</div>
+                <div className="item-metric">
+                  Height: "{playerData.height}cm"
+                </div>
+                <div className="item-metric">
+                  Wieght: "{playerData.weight}lbs"
+                </div>
               </div>
             </div>
             <div className="card-stats">
