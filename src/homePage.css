@@ -1,13 +1,14 @@
 * {
-  --background-color: #fff;
+  --background-color: rgb(228, 228, 228);
 }
 .dashboard-hero-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     --justify-content: center;
-    background-color: rgb(255, 255, 255);
+    --background-color: rgb(228, 228, 228);
     color:black;
+    background-image: url(./bakground-global.png);
 }
 .search-container{
   display: flex;
@@ -59,8 +60,6 @@
   display: flex;
   background-color: rgb(228, 228, 228);
   width: 50%;
-  
-
 }
 .tagline{
   font-size: 30px;
@@ -121,8 +120,8 @@
     margin-top: 10px;
     display: flex;
     flex-direction: column;
-    --backdrop-filter: blur(10px); /* Adjust the px value to control the blur intensity */
-    background-color: rgba(255, 149, 0, 0.101);    
+    backdrop-filter: blur(10px); /* Adjust the px value to control the blur intensity */
+    background-color: rgba(255, 255, 255, 0.329);    
     align-items: center;
     justify-content: center;
     align-self: center;
@@ -173,6 +172,7 @@
     border-radius: 50px;
     background-color: darkgreen;
    font-size: 24px;
+   color: white;
   }
 
 .item-text {
@@ -207,7 +207,7 @@
   }
 
 body {
-  background-color: #fff;
+  background-image: url(./bakground-global.png);
 }
 
 
@@ -303,14 +303,15 @@ body {
 .player-overall-value1 {
   position: relative;
   width: 50px; /* Ensure the width and height are equal for a perfect circle */
-  height: 40%;
+  height: 50px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 24px;
   background-color: grey;
-  transform: rotateY(180deg)
+  transform: rotateY(180deg);
+  color: white;
 }
 
 .player-overall-value::before {

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Radar } from "react-chartjs-2";
 import { useLocation } from "react-router-dom";
 import { supabase } from "./supabase";
-
+import logo from "./for_valued_homie.png";
 import "./profilePage.css";
 
 import "chart.js/auto";
@@ -181,13 +181,9 @@ function ProfilePage() {
 
   return (
     <div className="container">
-      <div className="header-container">
-        <img
-          className="header"
-          src={"https://cdn.worldvectorlogo.com/logos/vectorizationeu.svg"}
-          alt="Header Image"
-        />
-        <span className="header-text">Player Profile</span>
+      <div className="logo-container">
+        <img className="logo" src={logo} alt="Header Image" />
+        <div className="logo-text">SCOUT GLOBAL</div>
       </div>
       {isLoading ? (
         <div>Loading...</div> // Placeholder for your loading indicator
