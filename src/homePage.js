@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "./supabase.js";
 import "./homePage.css";
 import { useNavigate } from "react-router-dom";
-import logo from "./logo.png";
+import logo from "./for_valued_homie.png";
+import background from "./bakground-global.png";
+import background1 from "./globalback.png";
+
 function Card({ player, positionFilter }) {
   const [isFlipped, setIsFlipped] = useState(false);
   let navigate = useNavigate();
@@ -165,7 +168,6 @@ function HomePage() {
         setPlayers(data);
         setFilteredPlayers(data);
         setIsLoading(false);
-        //alert(data[0].Player); // Alert the id of the first player
       } else {
         setIsLoading(false);
         alert("No players found.");

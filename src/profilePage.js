@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Radar } from "react-chartjs-2";
 import { useLocation } from "react-router-dom";
 import { supabase } from "./supabase";
-
+import logo from "./for_valued_homie.png";
 import "./profilePage.css";
 
 import "chart.js/auto";
@@ -181,274 +181,202 @@ function ProfilePage() {
 
   return (
     <div className="container">
-      <div className="player-profile">Player Profile</div>
+      <div className="logo-container">
+        <img className="logo" src={logo} alt="Header Image" />
+        <div className="logo-text">SCOUT GLOBAL</div>
+      </div>
+
       {isLoading ? (
         <div>Loading...</div> // Placeholder for your loading indicator
       ) : (
         <>
-          <div className="name">{playerData.Player}</div>
-          <div className="card">
-            <div className="cardheader">
-              <div
-                className={`tab ${
-                  selectedTab === "Overview" ? "selected" : ""
-                }`}
-                onMouseEnter={() => setSelectedTab("Overview")}
-              >
-                Overview
-              </div>
-              <div
-                className={`tab ${selectedTab === "Stats" ? "selected" : ""}`}
-                onMouseEnter={() => setSelectedTab("Stats")}
-              >
-                Stats
+          <div className="ProfileContentHero">
+            <div className="playermetrics">
+              <div className="playerName">{playerData.Player}</div>
+              <img className="player1-image" src={playerData.img_url} />
+
+              <div className="column1">
+                <div className="item-metric">
+                  Nationality: "{playerData.nationality}""
+                </div>
+                <div className="item-metric">Age: "{playerData.age}"</div>
+                <div className="item-metric">
+                  Height: "{playerData.height}cm"
+                </div>
+                <div className="item-metric">
+                  Wieght: "{playerData.weight}lbs"
+                </div>
               </div>
             </div>
+            <div className="card-stats">
+              <div className="cardheader">
+                <div
+                  className={`tab ${
+                    selectedTab === "Overview" ? "selected" : ""
+                  }`}
+                  onMouseEnter={() => setSelectedTab("Overview")}
+                >
+                  Overview
+                </div>
+                <div
+                  className={`tab ${selectedTab === "Stats" ? "selected" : ""}`}
+                  onMouseEnter={() => setSelectedTab("Stats")}
+                >
+                  Stats
+                </div>
+              </div>
 
-            <div className="tabContent">
-              {selectedTab === "Overview" && (
-                <>
-                  <div className="player_content">
-                    <img className="player1-image" src={playerData.img_url} />
-                    <div className="column">
-                      <div className="player1_content">
-                        <div className="player1-content">
-                          <div className="player1-overall-content">
-                            <div className="item1-text">OVR</div>
-                            <div
-                              className="player1-overall-value"
-                              style={{
-                                "--fill-percentage": (() => {
-                                  switch (positionFilter) {
-                                    case "PG":
-                                      return `${playerData.PointGuardRating}%`;
-                                    case "SG":
-                                      return `${playerData.ShootingGuardRating}%`;
-                                    case "SF":
-                                      return `${playerData.SmallForwardRating}%`;
-                                    case "C":
-                                      return `${playerData.CenterRating}%`;
-                                    case "PF":
-                                      return `${playerData.PowerForwardRating}%`;
-                                    default:
-                                      return `${overall}%`; // You might want to replace 'overall' with an appropriate default value
-                                  }
-                                })(),
-                                background: (() => {
-                                  switch (positionFilter) {
-                                    case "PG":
-                                      return getFillColor(
-                                        playerData.PointGuardRating
-                                      );
-                                    case "SG":
-                                      return getFillColor(
-                                        playerData.ShootingGuardRating
-                                      );
-                                    case "SF":
-                                      return getFillColor(
-                                        playerData.SmallForwardRating
-                                      );
-                                    case "C":
-                                      return getFillColor(
-                                        playerData.CenterRating
-                                      );
-                                    case "PF":
-                                      return getFillColor(
-                                        playerData.PowerForwardRating
-                                      );
-                                    default:
-                                      return getFillColor(overall); // You might want to replace 'overall' with an appropriate default value
-                                  }
-                                })(),
+              <div className="tabContent">
+                {selectedTab === "Overview" && (
+                  <>
+                    <div className="player_content">
+                      <div className="column">
+                        <div className="bottoms">
+                          <div className="radar-chart">
+                            <RadarChart
+                              data={{
+                                labels: [
+                                  "Driving",
+                                  "Playmaking",
+                                  "Rebounding",
+                                  "Shooting",
+                                  "Defending",
+                                ],
+
+                                datasets: [
+                                  {
+                                    label: " ",
+                                    data: [
+                                      playerData.inside,
+                                      playerData.playmaking,
+                                      playerData.rebound,
+                                      playerData.outside,
+                                      playerData.defense,
+                                    ],
+                                    backgroundColor: "rgba(255, 100, 90, 0.8)",
+                                    borderColor: "rgba(250, 250, 90, 1)",
+                                    borderWidth: 1,
+                                    color: "black",
+                                    borderColor: "orange", // Line color
+                                    pointBackgroundColor: "white", // Point fill color
+                                    pointBorderColor: "black", // Point border color
+                                    pointHoverBackgroundColor: "#fff", // Point hover fill color
+                                    pointHoverBorderColor: "black",
+                                  },
+                                ],
                               }}
-                            >
-                              <div className="player1-overall-value1">
-                                {(() => {
-                                  switch (positionFilter) {
-                                    case "PG":
-                                      return playerData.PointGuardRating;
-                                    case "SG":
-                                      return playerData.ShootingGuardRating;
-                                    case "SF":
-                                      return playerData.SmallForwardRating;
-                                    case "C":
-                                      return playerData.CenterRating;
-                                    case "PF":
-                                      return playerData.PowerForwardRating;
-                                    default:
-                                      return playerData.PointGuardRating;
-                                  }
-                                })()}
-                              </div>
-                            </div>
-                          </div>
-                          <div className="player1-position-content">
-                            <div className="item1-text">POS</div>
-                            <div className="player1-position-value">
-                              {positionFilter}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="metric-container">
-                          <div className="column">
-                            <div className="metric-item">age:</div>
-                            <div className="metric-item">
-                              "{playerData.age}"
-                            </div>
-                          </div>
-                          <div className="column">
-                            <div className="metric-item">weight:</div>
-                            <div className="metric-item">
-                              "{playerData.weight} lbs"
-                            </div>
-                          </div>
-
-                          <div className="column">
-                            <div className="metric-item">height:</div>
-                            <div className="metric-item">
-                              "{playerData.height}"
-                            </div>
-                          </div>
-
-                          <div className="column">
-                            <div className="metric-item">nationality:</div>
-                            <div className="metric-item">
-                              "{playerData.nationality}"
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="bottoms">
-                        <div className="analysis">"{playerData.Analysis}"</div>
-                        <div className="radar-chart">
-                          <RadarChart
-                            data={{
-                              labels: [
-                                "Driving",
-                                "Playmaking",
-                                "Rebounding",
-                                "Shooting",
-                                "Defending",
-                              ],
-
-                              datasets: [
-                                {
-                                  label: " ",
-                                  data: [
-                                    playerData.inside,
-                                    playerData.playmaking,
-                                    playerData.rebound,
-                                    playerData.outside,
-                                    playerData.defense,
-                                  ],
-                                  backgroundColor: "rgba(255, 100, 90, 0.8)",
-                                  borderColor: "rgba(250, 250, 90, 1)",
-                                  borderWidth: 1,
-                                  color: "black",
-                                  borderColor: "orange", // Line color
-                                  pointBackgroundColor: "white", // Point fill color
-                                  pointBorderColor: "black", // Point border color
-                                  pointHoverBackgroundColor: "#fff", // Point hover fill color
-                                  pointHoverBorderColor: "black",
-                                },
-                              ],
-                            }}
-                            options={{
-                              scales: {
-                                r: {
-                                  pointLabels: {
-                                    color: "black", // Sets the color of the point labels (Value 1, Value 2, etc.) to black
-                                    font: {
-                                      size: 13, // Adjusts the font size, if needed
-                                      weight: 500, // You can specify other font properties here
+                              options={{
+                                scales: {
+                                  r: {
+                                    pointLabels: {
+                                      color: "black", // Sets the color of the point labels (Value 1, Value 2, etc.) to black
+                                      font: {
+                                        size: 13, // Adjusts the font size, if needed
+                                        weight: 500, // You can specify other font properties here
+                                      },
+                                      // Include additional pointLabels styling here if needed
                                     },
-                                    // Include additional pointLabels styling here if needed
+                                    angleLines: {
+                                      display: false,
+                                    },
+
+                                    grid: {
+                                      color: "grey",
+                                      lineWidth: 0.3, // Changes the grid lines to black
+                                    },
+                                    ticks: {
+                                      color: "black", // Tick labels (values) color
+                                      font: {
+                                        size: 12, // Example: setting the font size
+                                      },
+                                      // Additional customization for ticks can go here
+                                    },
+                                    suggestedMin: 0,
+                                    suggestedMax: 100,
+                                    ticks: {
+                                      // Change the tick marks to be bold and red
+                                      color: "black", // Color of the tick labels
+                                      font: {
+                                        size: 10, // Font size
+                                        style: "italic", // Font style
+                                        family: "Arial", // Font family
+                                      },
+                                      // Include a callback to format tick labels, e.g., adding a unit
+                                    },
                                   },
-                                  angleLines: {
+                                },
+                                elements: {
+                                  line: {
+                                    borderWidth: 1,
+                                    color: "black",
+                                  },
+                                },
+                                plugins: {
+                                  legend: {
                                     display: false,
-                                  },
-
-                                  grid: {
-                                    color: "grey",
-                                    lineWidth: 0.3, // Changes the grid lines to black
-                                  },
-                                  ticks: {
-                                    color: "black", // Tick labels (values) color
-                                    font: {
-                                      size: 12, // Example: setting the font size
-                                    },
-                                    // Additional customization for ticks can go here
-                                  },
-                                  suggestedMin: 0,
-                                  suggestedMax: 100,
-                                  ticks: {
-                                    // Change the tick marks to be bold and red
-                                    color: "black", // Color of the tick labels
-                                    font: {
-                                      size: 10, // Font size
-                                      style: "italic", // Font style
-                                      family: "Arial", // Font family
-                                    },
-                                    // Include a callback to format tick labels, e.g., adding a unit
-                                  },
-                                },
-                              },
-                              elements: {
-                                line: {
-                                  borderWidth: 1,
-                                  color: "black",
-                                },
-                              },
-                              plugins: {
-                                legend: {
-                                  display: false,
-                                  labels: {
-                                    // Customizing legend labels (e.g., the dataset label)
-                                    color: "blue", // Sets the color of the text
-                                    font: {
-                                      size: 20, // Sets font size
+                                    labels: {
+                                      // Customizing legend labels (e.g., the dataset label)
+                                      color: "blue", // Sets the color of the text
+                                      font: {
+                                        size: 20, // Sets font size
+                                      },
                                     },
                                   },
                                 },
-                              },
-                            }}
-                          />
+                              }}
+                            />
+                          </div>
                         </div>
+                        <div className="synopsis">{playerData.Analysis}</div>
                       </div>
                     </div>
+                  </>
+                )}
+                {selectedTab === "Stats" && (
+                  <div className="statsContent">
+                    <table>
+                      <tbody>
+                        {Array.from(
+                          { length: tableData.length / 4 },
+                          (_, rowIndex) => (
+                            <tr key={rowIndex}>
+                              {Array.from({ length: 4 }, (_, colIndex) => {
+                                const dataIndex = rowIndex * 4 + colIndex;
+                                return (
+                                  <td key={colIndex}>
+                                    <div className="column">
+                                      <div className="boxText">
+                                        {tableData[dataIndex]}
+                                      </div>
+                                      <div className="boxNumber">
+                                        {playerarray[dataIndex]}
+                                      </div>
+                                    </div>
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          )
+                        )}
+                      </tbody>
+                    </table>
                   </div>
-                </>
-              )}
-              {selectedTab === "Stats" && (
-                <div className="statsContent">
-                  <table>
-                    <tbody>
-                      {Array.from(
-                        { length: tableData.length / 4 },
-                        (_, rowIndex) => (
-                          <tr key={rowIndex}>
-                            {Array.from({ length: 4 }, (_, colIndex) => {
-                              const dataIndex = rowIndex * 4 + colIndex;
-                              return (
-                                <td key={colIndex}>
-                                  <div className="column">
-                                    <div className="boxText">
-                                      {tableData[dataIndex]}
-                                    </div>
-                                    <div className="boxNumber">
-                                      {playerarray[dataIndex]}
-                                    </div>
-                                  </div>
-                                </td>
-                              );
-                            })}
-                          </tr>
-                        )
-                      )}
-                    </tbody>
-                  </table>
+                )}
+              </div>
+            </div>
+            <div className="playersynopsis">
+              <div className="playerposition">
+                <div className="side-header">Position</div>
+                <div className="player1-overall-value">
+                  {playerData.Position}
                 </div>
-              )}
+              </div>
+              <div className="playeroverall">
+                <div className="side-header">Overall</div>
+                <div className="player1-overall-value">
+                  {playerData.OverallRating}
+                </div>
+              </div>
             </div>
           </div>
         </>
